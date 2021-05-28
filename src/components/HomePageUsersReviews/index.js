@@ -3,12 +3,12 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 // import Carousel from 'react-multi-carousel';
 
-import UserReview from 'src/components/UserReview';
+import HomePageUserReview from 'src/components/HomePageUserReview';
 
 import './usersReviews.scss';
 import 'react-multi-carousel/lib/styles.css';
 
-const UsersReviews = ({ loadUsersReviews, usersReviewList }) => {
+const HomePageUsersReviews = ({ loadUsersReviews, usersReviewList }) => {
   useEffect(
     loadUsersReviews,
     [],
@@ -19,7 +19,7 @@ const UsersReviews = ({ loadUsersReviews, usersReviewList }) => {
       <h3 className="usersReviews__title"> Notre communauté s'aggrandit </h3>
       <div className="usersReviews__list">
         {usersReviewList.map((user) => (
-          <UserReview key={user.id} {...user} />
+          <HomePageUserReview key={user.id} {...user} />
         ))}
       </div>
     </div>
@@ -77,9 +77,9 @@ const UsersReviews = ({ loadUsersReviews, usersReviewList }) => {
 // );
 // }
 
-UsersReviews.propTypes = {
+HomePageUsersReviews.propTypes = {
   loadUsersReviews: PropTypes.func.isRequired,
 
 };
 
-export default UsersReviews;
+export default HomePageUsersReviews;

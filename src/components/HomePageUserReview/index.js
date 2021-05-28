@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import './userReview.scss';
 
-const UserReview = ({ id, avatar, nickname, cities }) => (
+const HomePageUserReview = ({ id, avatar, nickname, cities }) => (
   <div className="userReview">
     <img className="userReview__image" src={`http://ec2-34-239-254-34.compute-1.amazonaws.com/images/avatars/${avatar}`} alt={`Avatar de ${nickname}`} />
     <div className="userReview__text">
@@ -16,7 +16,7 @@ const UserReview = ({ id, avatar, nickname, cities }) => (
   </div>
 );
 
-UserReview.propTypes = {
+HomePageUserReview.propTypes = {
   avatar: PropTypes.string,
   nickname: PropTypes.string.isRequired,
   cities: PropTypes.shape(
@@ -31,8 +31,8 @@ UserReview.propTypes = {
   ).isRequired,
 };
 
-UserReview.defaultProps = {
+HomePageUserReview.defaultProps = {
   avatar: defaultAvatar,
 };
 
-export default UserReview;
+export default HomePageUserReview;

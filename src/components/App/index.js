@@ -16,7 +16,7 @@ import HomePageHeader from 'src/components/HomePageHeader';
 import HomePageFonctionnalities from 'src/components/HomePageFonctionnalities';
 import HomePageMap from 'src/components/HomePageMap';
 
-import UsersReviews from 'src/containers/UsersReviews';
+import HomePageUsersReviews from 'src/containers/HomePageUsersReviews';
 
 import Results from 'src/components/Results';
 
@@ -89,7 +89,7 @@ const App = ({
           <HomePageHeader />
           <HomePageFonctionnalities />
           <HomePageMap />
-          <UsersReviews />
+          <HomePageUsersReviews />
         </Route>
         <Route path="/resultats" exact>
           <Results />

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import UsersReviews from 'src/components/UsersReviews';
+import HomePageUsersReviews from 'src/components/HomePageUsersReviews';
 import { loadUsersReviews  } from 'src/actions/user';
 
 // connection de props en lecture sur le state
@@ -22,4 +22,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
  // },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersReviews);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePageUsersReviews);
