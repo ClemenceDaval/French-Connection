@@ -1,51 +1,41 @@
-.SearchBar{
+@use 'src/styles/_vars';
+
+.searchBar{
   border-radius: 40px;
-  width: 80%;
-  margin: 3em auto auto;
-  
+  width: 100%;
 
   &__form{
-    position:relative;
-  }
-  &__mainInput{
-    width: 100%;
-      padding-left: 1em;
-      padding-right: 10%;
-      border: none;
-      border-radius: 40px;
-      font-size: 1.25em;
-      height: 2.5em;
-      color: black;
-      background-color: #F0F0F0;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: vars.$light-grey;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+    width:100%;
+    height: 2.5rem;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
   }
 
-  &__submit{
-    position: absolute;
-    right: 3%;
-    top: 0%;
+  &__mainInput{
+    border:none;
+    padding-left: 1em;
+    padding-right: 10%;
+    font-size: 1.25rem;
+    color: black;
+    background-color: transparent;
+    width:85%;
+  }
+
+  &__submitButton{
+    border:1px solid red;
+
     background-image: url("src/assets/pictures/search.png");
     background-position: 50%;
     background-repeat: no-repeat;
-    width: 4em;
     border: none;
-    height: 3.5em;
+    height: 100%;
+    width:2rem;
+    margin-right:1rem;
     cursor: pointer;
     border-radius: 40%;
-
   }
-  
 }
-
-@media only screen and (min-width: 601px) {
-  .SearchBar{
-    margin: 4em auto auto;
-    width: 60%;
-
-    &__icon{
-      right: 5%;
-    }
-  }
-
-}
-

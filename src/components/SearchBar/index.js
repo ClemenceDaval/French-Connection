@@ -51,17 +51,17 @@ const SearchBar = ({adress, setAdress, setCenter, saveUserAddress, loadUsersByCo
   };
 
   return (
-    <div className="SearchBar">
+    <div className="searchBar">
       <PlacesAutocomplete
         value={adress}
         onChange={setAdress}
         onSelect={handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
-            <form className="SearchBar__form">
-              <input className="SearchBar__mainInput" {...getInputProps({ placeholder: "Saisissez votre recherche" })} />
-              <input type="submit" className="SearchBar__submit" value="" onClick={handleSubmitClick}/>
+          <>
+            <form className="searchBar__form">
+              <input className="searchBar__mainInput" {...getInputProps({ placeholder: "Entrez une ville ou un pays" })} />
+              <input type="submit" className="searchBar__submitButton" value="" onClick={handleSubmitClick}/>
             </form>
             <div>
               {loading ? <div>...loading</div> : null}
@@ -78,7 +78,7 @@ const SearchBar = ({adress, setAdress, setCenter, saveUserAddress, loadUsersByCo
                 );
               })}
             </div>
-          </div>
+          </>
         )}
       </PlacesAutocomplete>
     </div>
