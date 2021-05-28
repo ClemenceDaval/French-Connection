@@ -19,11 +19,11 @@ import { formatRelative } from 'date-fns';
 
 import '@reach/combobox/styles.css';
 import mapStyles from './mapStyles';
-import './mapResults.scss';
+import './resultsMap.scss';
 
 const libraries = ['places'];
 
-const MapResults = ({
+const ResultsMap = ({
   center, markers, handleSelected, markerSelected, usersCities, listLoading, selectCity, setCenter, setAdress
 }) => {
   const mapContainerStyle = {
@@ -60,13 +60,13 @@ const MapResults = ({
   // if (!isLoaded) return 'Chargement...';
 
   return (
-    <div className="mapResults">
+    <div className="resultsMap">
       {!listLoading
       && (
       <GoogleMap
         id="map"
         mapContainerStyle={mapContainerStyle}
-        classname="mapResults__map"
+        classname="resultsMap__map"
         zoom={8}
         center={center}
         options={options}
@@ -168,4 +168,4 @@ function Search({ panTo }) {
   );
 }
 
-export default MapResults;
+export default ResultsMap;

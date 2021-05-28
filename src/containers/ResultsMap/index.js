@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import MapResults from 'src/components/MapResults';
+import ResultsMap from 'src/components/ResultsMap';
 import { setSelected, setNewMarker, saveUsersCity, setNewCenter, setNewAdress } from 'src/actions/map';
  
 // connection de props en lecture sur le state
@@ -34,4 +34,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapResults);
+export default connect(mapStateToProps, mapDispatchToProps)(ResultsMap);

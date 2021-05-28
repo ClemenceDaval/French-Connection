@@ -1,4 +1,4 @@
-.mapResults{
+.resultsMap{
   text-align: center;
   margin-top: 1em;
   &__map{
@@ -23,7 +23,7 @@
 
 @media only screen and (min-width: 601px) {
 
-  .mapResults{
+  .resultsMap{
     //display:flex;
     width: 50%;
     order: 2;
