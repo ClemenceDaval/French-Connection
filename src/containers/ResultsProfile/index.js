@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import ProfileResult from 'src/components/ProfileResult';
+import ResultsProfile from 'src/components/ResultsProfile';
 
 import { toggleLogIn } from 'src/actions/modals';
 
@@ -16,4 +16,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileResult);
+export default connect(mapStateToProps, mapDispatchToProps)(ResultsProfile);

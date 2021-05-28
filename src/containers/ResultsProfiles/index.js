@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import ProfilesResults from 'src/components/ProfilesResults';
+import ResultsProfiles from 'src/components/ResultsProfiles';
 
 const mapStateToProps = (state, ownProps) => ({
   usersList: state.map.usersList,
@@ -14,4 +14,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   //
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfilesResults);
+export default connect(mapStateToProps, mapDispatchToProps)(ResultsProfiles);

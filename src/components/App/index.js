@@ -18,7 +18,7 @@ import HomePageMap from 'src/components/HomePageMap';
 
 import UsersReviews from 'src/containers/UsersReviews';
 
-import ProfilesResults from 'src/containers/ProfilesResults';
+import ResultsProfiles from 'src/containers/ResultsProfiles';
 
 import ResultsMap from 'src/containers/ResultsMap';
 import Page404 from 'src/components/Page404';
@@ -97,7 +97,7 @@ const App = ({
           <SearchBar />
           <div className="app__ResultDesktop">
             <ResultsMap />
-            <ProfilesResults />
+            <ResultsProfiles />
           </div>
         </Route>
         <Route path="/notre-reseau" exact>
