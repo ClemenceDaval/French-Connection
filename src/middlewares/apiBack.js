@@ -4,8 +4,14 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 import {
-  LOAD_USER_PROFILE, saveUserProfile, ADD_NEW_USER, LOAD_USERS_CARDS, saveUsersCards, LOAD_USERS_REVIEWS, saveUsersReviews
+  LOAD_USER_PROFILE,
+  saveUserProfile,
+  LOAD_USERS_CARDS,
+  saveUsersCards,
+  LOAD_USERS_REVIEWS,
+  saveUsersReviews,
 } from 'src/actions/user';
+
 import { LOG_IN, LOAD_CONNECTED_USER_DATA, loadConnectedUserData, saveConnectedUserData, LOG_OUT, closeSignIn, saveTokenInState, setIsConnected, resetPassword } from 'src/actions/log';
 import {
   LOAD_USERS_BY_COUNTRY, saveUsersList, saveUsersCities, loadingCities, saveUsersCity,
@@ -23,8 +29,11 @@ import {
   saveAvatar,
   saveModifiedConnectedUserData,
 } from 'src/actions/modifyForm';
+
 import { toast } from 'react-toastify';
 import { setLoading, setMyProfileLoading } from 'src/actions/loading';
+
+import { ADD_NEW_USER } from 'src/actions/signIn';
 
 const api = axios.create({
   baseURL: 'http://ec2-34-239-254-34.compute-1.amazonaws.com/api/v1/',
@@ -159,7 +168,7 @@ export default (store) => (next) => (action) => {
       const state = store.getState();
       const {
         firstname, lastname, email, password, confirmedPassword,
-      } = state.user;
+      } = state.signIn;
       api
         .post(
           '/user',

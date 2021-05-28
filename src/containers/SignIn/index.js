@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import SignIn from 'src/components/SignIn';
 
 import { toggleSignIn, toggleLogIn } from 'src/actions/modals';
-import { addNewUser, changeSignInFieldValue } from 'src/actions/user';
+import { addNewUser, changeSignInFieldValue } from 'src/actions/signIn';
 
 // connection de props en lecture sur le state
 const mapStateToProps = (state, ownProps) => ({
   signIn: state.modals.signIn,
-  firstname: state.user.firstname,
-  lastname: state.user.lastname,
-  email: state.user.email,
-  password: state.user.password,
-  confirmedPassword: state.user.confirmedPassword,
+  firstname: state.signIn.firstname,
+  lastname: state.signIn.lastname,
+  email: state.signIn.email,
+  password: state.signIn.password,
+  confirmedPassword: state.signIn.confirmedPassword,
 });
 
 // connection de props fonctions qui déclenchent des actions

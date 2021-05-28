@@ -22,6 +22,7 @@ export const TOGGLE_LOG_OUT = 'TOGGLE_LOG_OUT';
 // action creator toggleLogOut
 export const toggleLogOut = (value) => ({
   type: TOGGLE_LOG_OUT,
+  value,
 });
 
 // action type TOGGLE_MODIFY_CITY_MODAL
@@ -32,5 +33,3 @@ export const toggleModifyCityModal = (value) => ({
   type: TOGGLE_MODIFY_CITY_MODAL,
   value,
 });
-
-
