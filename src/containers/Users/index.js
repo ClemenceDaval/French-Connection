@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 
-import UsersCards from 'src/components/UsersCards';
+import Users from 'src/components/Users';
 import { loadUsersCards, RenderNewList, changeInputValue } from 'src/actions/user';
-
 
 // connection de props en lecture sur le state
 // ces props seront des tableaux, objets, booléens, numériques, string
@@ -29,4 +28,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersCards);
+export default connect(mapStateToProps, mapDispatchToProps)(Users);

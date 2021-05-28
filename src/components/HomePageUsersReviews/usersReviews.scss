@@ -25,6 +25,7 @@
     justify-content:center ;
     flex-wrap: wrap;
     width: 60%;
+    padding-bottom:1.5rem;
     
     @media (min-width: vars.$breakpoint-phone) {
       flex-direction:row;
