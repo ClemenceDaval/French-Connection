@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
 
-import UserCard from 'src/components/UserCard';
+import ResultsProfile from 'src/components/ResultsProfile';
 
 import { toggleLogIn } from 'src/actions/modals';
 
 // connection de props en lecture sur le state
 const mapStateToProps = (state, ownProps) => ({
   isConnected: state.log.isConnected,
-  isLoading: state.user.isLoading,
 });
 
 // connection de props fonctions qui déclenchent des actions
@@ -17,4 +16,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ResultsProfile);

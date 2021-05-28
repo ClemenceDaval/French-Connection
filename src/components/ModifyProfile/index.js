@@ -24,7 +24,7 @@ const ModifyProfile = ({
   isLoaded,
   loadHobbiesList,
   loadServicesList,
-  openModal,
+  toggleModifyCityModal,
   redirection,
   isConnected,
 }) => {
@@ -101,6 +101,10 @@ const ModifyProfile = ({
     loadHobbiesList();
     loadServicesList();
   }, []);
+
+  const openModifyCityModal = () => {
+    toggleModifyCityModal(true);
+  };
 
   return (
     <>
@@ -223,7 +227,7 @@ const ModifyProfile = ({
                     {connectedUserData.cities !== null && completeNewAddress.length === 0 ? `Votre ville de résidence est ${connectedUserData.cities.name}, ${connectedUserData.cities.country.frenchName}.` : ''}
                     {completeNewAddress.length !== 0 ? `Votre ville de résidence est ${completeNewAddress[0]}, ${completeNewAddress[1]}.` : ''}
                   </div>
-                  <button className="modifyProfile__form__city__button" type="button" onClick={openModal}> Changer de ville </button>
+                  <button className="modifyProfile__form__city__button" type="button" onClick={openModifyCityModal}> Changer de ville </button>
                   <ModifyCity />
                 </div>
               </div>
@@ -299,7 +303,7 @@ ModifyProfile.propTypes = {
   isLoaded: PropTypes.bool.isRequired,
   loadHobbiesList: PropTypes.func.isRequired,
   loadServicesList: PropTypes.func.isRequired,
-  openModal: PropTypes.func.isRequired,
+  toggleModifyCityModal: PropTypes.func.isRequired,
   redirection: PropTypes.bool.isRequired,
   isConnected: PropTypes.bool.isRequired,
 };

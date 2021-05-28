@@ -10,14 +10,14 @@ import ProfileDescription from 'src/components/ProfileDescription';
 import ProfileHobbies from 'src/components/ProfileHobbies';
 import ProfileServices from 'src/components/ProfileServices';
 import ProfileButton from 'src/components/ProfileButton';
-import Loading from 'src/components/Loading';
+import Loader from 'src/components/Loader';
 
 // == import style
 import './myProfile.scss';
 
 const MyProfile = ({
   connectedUserData,
-  openLogOut,
+  toggleLogOut,
   redirect,
   isConnected,
   isMyProfileLoaded,
@@ -35,9 +35,13 @@ const MyProfile = ({
     name = `${connectedUserData.firstname} ${connectedUserData.lastname}`;
   }
 
+  const openLogOut = () => {
+    toggleLogOut(true);
+  };
+
   return (
     <>
-      {!isMyProfileLoaded && <Loading /> }
+      {!isMyProfileLoaded && <Loader /> }
 
       {!isConnected && <Redirect to="/" />}
 
@@ -82,7 +86,7 @@ MyProfile.propTypes = {
       },
     ).isRequired,
   ).isRequired,
-  openLogOut: PropTypes.func.isRequired,
+  toggleLogOut: PropTypes.func.isRequired,
   redirect: PropTypes.func.isRequired,
   isConnected: PropTypes.bool.isRequired,
   isMyProfileLoaded: PropTypes.bool.isRequired,

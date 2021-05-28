@@ -14,7 +14,7 @@ const UserCard = ({
   cities,
   avatar,
   isConnected,
-  openModal,
+  toggleLogIn,
 }) => {
   let localisation = '';
   if (cities != null) {
@@ -24,8 +24,12 @@ const UserCard = ({
     localisation = 'Non précisé';
   }
 
+  const openLogIn = () => {
+    toggleLogIn(true);
+  };
+
   return (
-    <Link to={isConnected ? `/notre-reseau/utilisateur/${id}` : 'notre-reseau'} className="userCard" onClick={isConnected ? '' : openModal}>
+    <Link to={isConnected ? `/notre-reseau/utilisateur/${id}` : 'notre-reseau'} className="userCard" onClick={isConnected ? '' : openLogIn}>
       <div className="userCard__picture">
         <img alt={`Avatar de ${firstname} ${lastname}`} className={avatar === null ? 'hidden' : ''} src={`http://ec2-34-239-254-34.compute-1.amazonaws.com/images/avatars/${avatar}`} />
         <img alt="Avatar par défaut" className={avatar !== null ? 'hidden' : ''} src={defaultAvatar} />
@@ -58,7 +62,7 @@ UserCard.propTypes = {
     },
   ),
   isConnected: PropTypes.bool.isRequired,
-  openModal: PropTypes.func.isRequired,
+  toggleLogIn: PropTypes.func.isRequired,
 };
 
 UserCard.defaultProps = {

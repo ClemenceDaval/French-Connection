@@ -1,28 +1,27 @@
 import { connect } from 'react-redux';
 
 import SignIn from 'src/components/SignIn';
-import { closeSignIn, openLogIn } from 'src/actions/log';
-import { addNewUser, changeSignInFieldValue } from 'src/actions/user';
+
+import { toggleSignIn, toggleLogIn } from 'src/actions/modals';
+import { addNewUser, changeSignInFieldValue } from 'src/actions/signIn';
 
 // connection de props en lecture sur le state
-// ces props seront des tableaux, objets, booléens, numériques, string
 const mapStateToProps = (state, ownProps) => ({
-  isOpen: state.log.isSignInOpen,
-  firstname: state.user.firstname,
-  lastname: state.user.lastname,
-  email: state.user.email,
-  password: state.user.password,
-  confirmedPassword: state.user.confirmedPassword,
+  signIn: state.modals.signIn,
+  firstname: state.signIn.firstname,
+  lastname: state.signIn.lastname,
+  email: state.signIn.email,
+  password: state.signIn.password,
+  confirmedPassword: state.signIn.confirmedPassword,
 });
 
 // connection de props fonctions qui déclenchent des actions
-// ces props seront des fonctions
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  close: () => {
-    dispatch(closeSignIn());
+  toggleLogIn: (value) => {
+    dispatch(toggleLogIn(value));
   },
-  openLogIn: () => {
-    dispatch(openLogIn());
+  toggleSignIn: (value) => {
+    dispatch(toggleSignIn(value));
   },
   changeField: (value, name) => {
     dispatch(changeSignInFieldValue(value, name));

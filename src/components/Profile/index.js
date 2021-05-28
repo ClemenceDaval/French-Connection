@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useParams, useLocation, Redirect } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 // == import local
 import ProfilePrincipalInfos from 'src/components/ProfilePrincipalInfos';
@@ -15,17 +15,14 @@ import ProfileServices from 'src/components/ProfileServices';
 import ContactMe from 'src/containers/ContactMe';
 // import ProfileButton from 'src/components/ProfileButton';
 
-import Loading from 'src/components/Loading';
+import Loader from 'src/components/Loader';
 
 // == import style
 import './profile.scss';
 
 const Profile = ({
-  isConnected,
   loadUserProfile,
   userInfos,
-  connectedUserData,
-  openLogOut,
   saveAvatar,
   isLoading,
 }) => {
@@ -49,7 +46,7 @@ const Profile = ({
 
   return (
     <>
-      {isLoading && <Loading />}
+      {isLoading && <Loader />}
       {!isLoading && (
         <div className="profile">
           <h1 className="profile__title"> Profil de {name} </h1>

@@ -5,6 +5,8 @@ import logReducer from './log';
 import mapReducer from './map';
 import hobbiesReducer from './hobbies';
 import servicesReducer from './services';
+import modalsReducer from './modals';
+import signInReducer from './signIn';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -12,7 +14,8 @@ const rootReducer = combineReducers({
   map: mapReducer,
   hobbies: hobbiesReducer,
   services: servicesReducer,
-
+  modals: modalsReducer,
+  signIn: signInReducer,
 });
 
 export default rootReducer;

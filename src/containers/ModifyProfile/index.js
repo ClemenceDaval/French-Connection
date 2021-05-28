@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
-import {
-  loadUserProfile,
-  openModifyCityModal,
-} from 'src/actions/user';
 
+import ModifyProfile from 'src/components/ModifyProfile';
+
+import { loadUserProfile } from 'src/actions/user';
+import { toggleModifyCityModal } from 'src/actions/modals';
 import { changePasswordProfileFormFieldValue, changeProfileFormFieldValue } from 'src/actions/log';
 
 import { loadHobbiesList } from 'src/actions/hobbies';
 import { loadServicesList } from 'src/actions/services';
 import { modifyProfile } from 'src/actions/modifyForm';
 
-import ModifyProfile from 'src/components/ModifyProfile';
 
 // connection de props en lecture sur le state
 // ces props seront des tableaux, objets, booléens, numériques, string
@@ -39,8 +38,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   modifyProfile: (userId, myHobbiesList, myServicesList) => {
     dispatch(modifyProfile(userId, myHobbiesList, myServicesList));
   },
-  openModal: () => {
-    dispatch(openModifyCityModal());
+  toggleModifyCityModal: (value) => {
+    dispatch(toggleModifyCityModal(value));
   },
   loadHobbiesList: () => {
     dispatch(loadHobbiesList());

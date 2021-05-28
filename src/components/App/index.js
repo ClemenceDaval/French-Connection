@@ -16,14 +16,12 @@ import HomePageHeader from 'src/components/HomePageHeader';
 import HomePageFonctionnalities from 'src/components/HomePageFonctionnalities';
 import HomePageMap from 'src/components/HomePageMap';
 
-import UsersReviews from 'src/containers/UsersReviews';
+import HomePageUsersReviews from 'src/containers/HomePageUsersReviews';
 
-import ProfilesResults from 'src/containers/ProfilesResults';
+import Results from 'src/components/Results';
 
-import MapResults from 'src/containers/MapResults';
 import Page404 from 'src/components/Page404';
 import Page403 from 'src/components/Page403';
-import SearchBar from 'src/containers/SearchBar';
 import Profile from 'src/containers/Profile';
 import MyProfile from 'src/containers/MyProfile';
 import UsersCards from 'src/containers/UsersCards';
@@ -91,14 +89,10 @@ const App = ({
           <HomePageHeader />
           <HomePageFonctionnalities />
           <HomePageMap />
-          <UsersReviews />
+          <HomePageUsersReviews />
         </Route>
         <Route path="/resultats" exact>
-          <SearchBar />
-          <div className="app__ResultDesktop">
-            <MapResults />
-            <ProfilesResults />
-          </div>
+          <Results />
         </Route>
         <Route path="/notre-reseau" exact>
           <UsersCards />

@@ -7,8 +7,8 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import './modifyCity.scss';
 
 const ModifyCity = ({
-  isOpen,
-  close,
+  modifyCity,
+  toggleModifyCityModal,
   address,
   setNewAddress,
   saveNewAddress,
@@ -42,19 +42,19 @@ const ModifyCity = ({
   };
 
   const handleClick = () => {
-    close();
+    toggleModifyCityModal(false);
   };
 
-  const handleClose = () => {
+  const closeModifyCity = () => {
     resetCityField();
-    close();
+    toggleModifyCityModal(false);
   };
 
   return (
-    <div className={isOpen ? 'modifyCity' : 'modifyCity__close'}>
+    <div className={modifyCity ? 'modifyCity' : 'modifyCity__close'}>
       <div className="modifyCity__modal">
         <h1 className="modifyCity__modal__title"> Modifier votre ville de résidence </h1>
-        <button className="modifyCity__modal__closeButton" type="button" onClick={handleClose}> X </button>
+        <button className="modifyCity__modal__closeButton" type="button" onClick={closeModifyCity}> X </button>
         <div className="SearchBar">
           <PlacesAutocomplete
             value={address}
@@ -93,8 +93,8 @@ const ModifyCity = ({
 };
 
 ModifyCity.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  close: PropTypes.func.isRequired,
+  modifyCity: PropTypes.bool.isRequired,
+  toggleModifyCityModal: PropTypes.func.isRequired,
   address: PropTypes.string.isRequired,
   setNewAddress: PropTypes.func.isRequired,
   saveNewAddress: PropTypes.func.isRequired,

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MapProfile from 'src/containers/MapProfile';
+import ProfileMap from 'src/components/ProfileMap';
 
 // == import style
 import './profileLocalisation.scss';
@@ -20,7 +20,7 @@ const ProfileLocalisation = ({ name, longitude, latitude, country, isMyProfile, 
       <div className="profileLocalisation__title"> {name !== '' ? `${name}, ${country.frenchName}` : '' }</div>
       <div className="profileLocalisation__empty"> {name === '' ? emptyMessage : '' }</div>
       <div className="profileLocalisation__map">
-        {name !== '' && <MapProfile latProp={latitude} lngProp={longitude} />}
+        {name !== '' && <ProfileMap latProp={latitude} lngProp={longitude} />}
       </div>
     </div>
   );
