@@ -22,7 +22,6 @@ import Results from 'src/components/Results';
 
 import Page404 from 'src/components/Page404';
 import Page403 from 'src/components/Page403';
-import SearchBar from 'src/containers/SearchBar';
 import Profile from 'src/containers/Profile';
 import MyProfile from 'src/containers/MyProfile';
 import UsersCards from 'src/containers/UsersCards';
@@ -93,10 +92,7 @@ const App = ({
           <UsersReviews />
         </Route>
         <Route path="/resultats" exact>
-          <SearchBar />
-          <div className="app__ResultDesktop">
-            <Results />
-          </div>
+          <Results />
         </Route>
         <Route path="/notre-reseau" exact>
           <UsersCards />

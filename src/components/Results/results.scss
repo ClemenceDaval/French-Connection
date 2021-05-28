@@ -1,3 +1,9 @@
-.results{
+.results__views{
   display:flex;
+  flex-direction:column;
+  justify-content:center;
+
+  @media only screen and (min-width: 601px) {
+    flex-direction:row;
+  }
 }
