@@ -10,7 +10,7 @@ import ProfileDescription from 'src/components/ProfileDescription';
 import ProfileHobbies from 'src/components/ProfileHobbies';
 import ProfileServices from 'src/components/ProfileServices';
 import ProfileButton from 'src/components/ProfileButton';
-import Loading from 'src/components/Loading';
+import Loader from 'src/components/Loader';
 
 // == import style
 import './myProfile.scss';
@@ -41,7 +41,7 @@ const MyProfile = ({
 
   return (
     <>
-      {!isMyProfileLoaded && <Loading /> }
+      {!isMyProfileLoaded && <Loader /> }
 
       {!isConnected && <Redirect to="/" />}
 

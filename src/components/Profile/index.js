@@ -15,7 +15,7 @@ import ProfileServices from 'src/components/ProfileServices';
 import ContactMe from 'src/containers/ContactMe';
 // import ProfileButton from 'src/components/ProfileButton';
 
-import Loading from 'src/components/Loading';
+import Loader from 'src/components/Loader';
 
 // == import style
 import './profile.scss';
@@ -46,7 +46,7 @@ const Profile = ({
 
   return (
     <>
-      {isLoading && <Loading />}
+      {isLoading && <Loader />}
       {!isLoading && (
         <div className="profile">
           <h1 className="profile__title"> Profil de {name} </h1>

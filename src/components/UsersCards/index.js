@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Loading from 'src/components/Loading';
+import Loader from 'src/components/Loader';
 
 import UserCard from 'src/containers/UserCard';
 import './usersCards.scss';
@@ -30,7 +30,7 @@ const UsersCards = ({loadUsersCards, usersList, RenderNewList, newUserList, inpu
 
   return (
     <>
-      {isLoading && (<Loading />)}
+      {isLoading && (<Loader />)}
       {!isLoading && (
         <div className="usersCards">
           <h1 className="usersCards__title">Notre réseau</h1>

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import './loading.scss';
+import './loader.scss';
 
-const Loading = () => (
+const Loader = () => (
   <div className="loader__container">
     <div id="loader-7" className="loader" />
   </div>
 );
 
-export default Loading;
+export default Loader;
