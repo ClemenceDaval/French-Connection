@@ -1,13 +1,11 @@
+/* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import illu from 'src/assets/images/illu.svg';
 
-// == import local
-import AboutUsReview from 'src/components/AboutUsReview';
-
 import './aboutUs.scss';
 
-const AboutUs = ({dataTeam}) => (
+const AboutUs = ({ dataTeam }) => (
   <div className="aboutUs">
     <div className="aboutUs__title"> À Propos de nous</div>
     <div className="aboutUs__project">
@@ -26,15 +24,19 @@ const AboutUs = ({dataTeam}) => (
     <div className="aboutUs__team">
       <h2 className="aboutUs__team__title">L'Equipe</h2>
       <div className="aboutUs__team__list">
-        {dataTeam.map((team) => (
-          <AboutUsReview key={team.id} {...team} />
+        {dataTeam.map((member) => (
+          <div key={member.id} className="aboutUs__team__item">
+            <div className={`aboutUs__team__item__picture aboutUs__team__item__picture--${member.name}`} />
+            <div className="aboutUs__team__item__card">
+              <div className="aboutUs__team__item__card__name">{member.name}</div>
+              <div className="aboutUs__team__item__card__role"> {member.role}</div>
+            </div>
+          </div>
         ))}
       </div>
     </div>
   </div>
-
 );
-
 
 AboutUs.propTypes = {
   dataTeam: PropTypes.arrayOf(
@@ -45,6 +47,5 @@ AboutUs.propTypes = {
     ),
   ).isRequired,
 };
-
 
 export default AboutUs;
