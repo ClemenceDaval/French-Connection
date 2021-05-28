@@ -37,7 +37,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         newUserList: action.result,
-      };  
+      };
     case CHANGE_INPUTVALUE:
       return {
         ...state,

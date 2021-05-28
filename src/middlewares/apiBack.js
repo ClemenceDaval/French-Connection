@@ -33,7 +33,7 @@ import {
 import { toast } from 'react-toastify';
 import { setLoading, setMyProfileLoading } from 'src/actions/loading';
 
-import { ADD_NEW_USER } from 'src/actions/signIn';
+import { ADD_NEW_USER, resetSignInFields } from 'src/actions/signIn';
 
 const api = axios.create({
   baseURL: 'http://ec2-34-239-254-34.compute-1.amazonaws.com/api/v1/',
@@ -185,8 +185,10 @@ export default (store) => (next) => (action) => {
           console.log('Vous êtes inscrits');
           store.dispatch(toggleSignIn(false));
           toast.info('Inscription réussie. Veuillez vous connecter');
+          store.dispatch(resetSignInFields());
         }).catch((error) => {
           console.log(error);
+          toast.info('Un problème est survenu');
         });
       next(action);
       break;

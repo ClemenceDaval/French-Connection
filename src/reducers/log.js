@@ -33,9 +33,6 @@ import { SET_MY_PROFILE_LOADING } from 'src/actions/loading';
 
 const initialState = {
   isConnected: false,
-  isLogInOpen: false,
-  isSignInOpen: false,
-  isLogOutOpen: false,
   email: '',
   password: '',
   connectedUserData: '',

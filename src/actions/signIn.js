@@ -15,3 +15,11 @@ export const ADD_NEW_USER = 'ADD_NEW_USER';
 export const addNewUser = () => ({
   type: ADD_NEW_USER,
 });
+
+// action type RESET_SIGN_IN_FIELDS
+export const RESET_SIGN_IN_FIELDS = 'RESET_SIGN_IN_FIELDS';
+
+// action creator resetSignInFields
+export const resetSignInFields = () => ({
+  type: RESET_SIGN_IN_FIELDS,
+});

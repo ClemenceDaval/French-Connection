@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Field from 'src/components/Field';
@@ -19,13 +19,34 @@ const SignIn = ({
 }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
+  useEffect(() => {
+    setErrorMessage('');
+  }, [signIn]);
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (password === confirmedPassword) {
-      handleSignIn();
+    const emailFormat = new RegExp(/^\S+@\S+\.\S+$/);
+
+    if (firstname === '') {
+      setErrorMessage('Le champ \'Prénom\' ne peut pas être vide');
     }
-    else {
-      setErrorMessage('Les mots de passe ne correspondent pas');
+    else if (lastname === '') {
+      setErrorMessage('Le champ \'Nom\' ne peut pas être vide');
+    }
+    else if (email === '') {
+      setErrorMessage('Le champ \'Email\' ne peut pas être vide');
+    }
+    else if (!emailFormat.test(email)) {
+      setErrorMessage('L\'email n\'est pas valide');
+    }
+    else if (password === '' || confirmedPassword === '') {
+      setErrorMessage('Les champs \'Mot de passe\' ne peuvent pas être vides');
+    }
+    else if (password !== confirmedPassword) {
+      setErrorMessage('Les mots de passe ne corespondent pas');
+    }
+    else if (password === confirmedPassword) {
+      handleSignIn();
     }
   };
 
@@ -45,7 +66,7 @@ const SignIn = ({
         <button className="signIn__modal__closeButton" type="button" onClick={closeSignIn}> X </button>
         <form className="signIn__modal__form" onSubmit={handleSubmit}>
           {errorMessage && (
-            <p className="error"> {errorMessage} </p>
+            <p className="signIn__modal__form__error"> {errorMessage} </p>
           )}
           <Field
             className="signIn__modal__form__field"
