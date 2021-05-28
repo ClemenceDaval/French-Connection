@@ -11,21 +11,27 @@ const ProfileResult = ({
   lastname,
   avatar,
   isConnected,
-  openModal,
-}) => (
-  <Link to={isConnected ? `/notre-reseau/utilisateur/${id}` : '/resultats'} className="profileResult__Card" onClick={isConnected ? '' : openModal}>
-    <div className="profileResult">
-      <div className="profileResult__picture">
-        <img src={`http://ec2-34-239-254-34.compute-1.amazonaws.com/images/avatars/${avatar}`} alt={`avatar de ${firstname} ${lastname}`} className="profileResult__Picture" />
+  toggleLogIn,
+}) => {
+  const openLogIn = () => {
+    toggleLogIn(true);
+  };
+
+  return (
+    <Link to={isConnected ? `/notre-reseau/utilisateur/${id}` : '/resultats'} className="profileResult__Card" onClick={isConnected ? '' : openLogIn}>
+      <div className="profileResult">
+        <div className="profileResult__picture">
+          <img src={`http://ec2-34-239-254-34.compute-1.amazonaws.com/images/avatars/${avatar}`} alt={`avatar de ${firstname} ${lastname}`} className="profileResult__Picture" />
+        </div>
+        <div className="profileResult__text">
+          <div className="profileResult__name">{nickname != null ? nickname : `${firstname} ${lastname}`}</div>
+          <div className="profileResult__biography">{biography}</div>
+          <div className="profileResult__link"> Voir le profil </div>
+        </div>
       </div>
-      <div className="profileResult__text">
-        <div className="profileResult__name">{nickname != null ? nickname : `${firstname} ${lastname}`}</div>
-        <div className="profileResult__biography">{biography}</div>
-        <div className="profileResult__link"> Voir le profil </div>
-      </div>
-    </div>
-  </Link>
-);
+    </Link>
+  );
+};
 
 ProfileResult.propTypes = {
   id: PropTypes.number.isRequired,
@@ -35,7 +41,7 @@ ProfileResult.propTypes = {
   nickname: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
   isConnected: PropTypes.bool.isRequired,
-  openModal: PropTypes.func.isRequired,
+  toggleLogIn: PropTypes.func.isRequired,
 };
 
 export default ProfileResult;

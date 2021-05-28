@@ -1,9 +1,7 @@
 import {
-  CLOSE_LOG_IN, OPEN_LOG_IN,
-  CLOSE_SIGN_IN, OPEN_SIGN_IN,
   CHANGE_LOG_IN_FIELD_VALUE,
   SAVE_CONNECTED_USER_DATA,
-  OPEN_LOG_OUT, CLOSE_LOG_OUT, LOG_OUT,
+  LOG_OUT,
   SET_IS_CONNECTED,
   SAVE_TOKEN_IN_STATE,
   CHANGE_PASSWORD_PROFILE_FORM_FIELD_VALUE,
@@ -69,42 +67,10 @@ export default (state = initialState, action = {}) => {
         email: '',
         password: '',
       };
-    case CLOSE_LOG_IN:
-      return {
-        ...state,
-        isLogInOpen: false,
-      };
-    case OPEN_LOG_IN:
-      return {
-        ...state,
-        isLogInOpen: true,
-        isSignInOpen: false,
-      };
-    case CLOSE_SIGN_IN:
-      return {
-        ...state,
-        isSignInOpen: false,
-      };
-    case OPEN_SIGN_IN:
-      return {
-        ...state,
-        isSignInOpen: true,
-        isLogInOpen: false,
-      };
     case CHANGE_LOG_IN_FIELD_VALUE:
       return {
         ...state,
         [action.name]: action.value,
-      };
-    case OPEN_LOG_OUT:
-      return {
-        ...state,
-        isLogOutOpen: true,
-      };
-    case CLOSE_LOG_OUT:
-      return {
-        ...state,
-        isLogOutOpen: false,
       };
     case LOG_OUT:
       return {
@@ -176,14 +142,6 @@ export default (state = initialState, action = {}) => {
           confirmedNewPassword: '',
         },
       };
-    // case TOGGLE_HELPER_CHECKBOX:
-    //   return {
-    //     ...state,
-    //     connectedUserData: {
-    //       ...state.connectedUserData,
-    //       helper: !action.helper,
-    //     },
-    //   };
     case BECOME_HELPER:
       return {
         ...state,

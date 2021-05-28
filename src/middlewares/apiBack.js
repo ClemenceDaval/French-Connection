@@ -14,6 +14,8 @@ import {
 import { LOAD_HOBBIES_LIST, saveHobbiesList, setLoadingHobbies } from 'src/actions/hobbies';
 import { LOAD_SERVICES_LIST, saveServicesList, setLoadingServices } from 'src/actions/services';
 
+import { toggleLogIn, toggleLogOut, toggleSignIn } from 'src/actions/modals';
+
 import {
   MODIFY_PROFILE,
   redirectToMyProfile,
@@ -35,8 +37,6 @@ export default (store) => (next) => (action) => {
       // on extrait l'email et le password du state
       const state = store.getState();
       const { email: username, password } = state.log;
-      // console.log(username);
-      // console.log(password);
 
       api
         .post(
@@ -64,27 +64,20 @@ export default (store) => (next) => (action) => {
 
           // on va chercher les données de l'utilisateur connecté
           store.dispatch(loadConnectedUserData(decodedToken.id));
-          // // on décode notre token pour récupérer les données de l'utilisateur connecté
-          // // et on les sauvegardes dans le state
-          // const decodedToken = jwt_decode(userToken);
-          // console.log('je me connecte');
-          // console.log(decodedToken);
-          // // const connectedUserData = decodedToken.username;
-          // // console.log(connectedUserData);
-          // store.dispatch(saveConnectedUserData(decodedToken));
-          // // window.location.href = '/';
+          // on ferme le modal de logIn
+          store.dispatch(toggleLogIn(false));
+          // on informe l'utilisateur qu'il est connecté
           toast.info('Vous êtes maintenant connectés');
-          // window.location.href = '/';
         }).catch((error) => {
           console.log('Vous n\'avez pas pu être identifié');
         });
       next(action);
       break;
     }
+
     case LOAD_CONNECTED_USER_DATA: {
       const { id } = action;
       const userToken = localStorage.getItem('token');
-      // console.log(userToken);
 
       api
         .get(`/user/${id}`, {
@@ -181,9 +174,8 @@ export default (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
           console.log('Vous êtes inscrits');
-          store.dispatch(closeSignIn());
+          store.dispatch(toggleSignIn(false));
           toast.info('Inscription réussie. Veuillez vous connecter');
-          // store.dispatch(setIsConnected(true));
         }).catch((error) => {
           console.log(error);
         });
@@ -193,8 +185,6 @@ export default (store) => (next) => (action) => {
 
     case LOAD_USERS_CARDS:
       // affichage de tous les profils sous forme de cards
-      // // -- gestion loader for profilPage
-      // store.dispatch(setLoading(true));
 
       api
         .get('user')
@@ -355,10 +345,12 @@ export default (store) => (next) => (action) => {
       next(action);
       break;
     }
+
     case LOG_OUT:
       delete api.defaults.headers.common.Authorization;
       localStorage.removeItem('token');
       console.log('je me déconnecte');
+      store.dispatch(toggleLogOut(false));
       next(action);
       break;
 

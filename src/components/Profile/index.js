@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useParams, useLocation, Redirect } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 // == import local
 import ProfilePrincipalInfos from 'src/components/ProfilePrincipalInfos';
@@ -21,11 +21,8 @@ import Loading from 'src/components/Loading';
 import './profile.scss';
 
 const Profile = ({
-  isConnected,
   loadUserProfile,
   userInfos,
-  connectedUserData,
-  openLogOut,
   saveAvatar,
   isLoading,
 }) => {

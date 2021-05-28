@@ -5,17 +5,26 @@ import Field from 'src/components/Field';
 
 import './logIn.scss';
 
-const LogIn = ({ isOpen, close, openSignIn, email, password, changeField, handleLogin}) => {
+const LogIn = ({ logIn, toggleLogIn, toggleSignIn, email, password, changeField, handleLogin}) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleLogin();
   };
 
+  const closeLogIn = () => {
+    toggleLogIn(false);
+  };
+
+  const openSignIn = () => {
+    toggleSignIn(true);
+    toggleLogIn(false);
+  };
+
   return (
-    <div className={isOpen ? 'logIn' : 'logIn__close'}>
+    <div className={logIn ? 'logIn' : 'logIn__close'}>
       <div className="logIn__modal">
         <h1 className="logIn__modal__title"> Bienvenue sur French Connection </h1>
-        <button className="logIn__modal__closeButton" type="button" onClick={close}> X </button>
+        <button className="logIn__modal__closeButton" type="button" onClick={closeLogIn}> X </button>
         <form className="logIn__modal__form" onSubmit={handleSubmit}>
           <Field
             className="logIn__modal__form__field"
@@ -42,9 +51,9 @@ const LogIn = ({ isOpen, close, openSignIn, email, password, changeField, handle
 };
 
 LogIn.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  close: PropTypes.func.isRequired,
-  openSignIn: PropTypes.func.isRequired,
+  logIn: PropTypes.bool.isRequired,
+  toggleLogIn: PropTypes.func.isRequired,
+  toggleSignIn: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,

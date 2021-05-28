@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import { openLogOut } from 'src/actions/log';
-import { loadUserProfile } from 'src/actions/user';
-import { redirectToMyProfile } from 'src/actions/modifyForm';
 
 import MyProfile from 'src/components/MyProfile';
 
+import { toggleLogOut } from 'src/actions/modals';
+import { loadUserProfile } from 'src/actions/user';
+import { redirectToMyProfile } from 'src/actions/modifyForm';
+
 // connection de props en lecture sur le state
-// ces props seront des tableaux, objets, booléens, numériques, string
 const mapStateToProps = (state, ownProps) => ({
   connectedUserData: state.log.connectedUserData,
   userInfos: state.user.userInfos,
@@ -15,10 +15,9 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 // connection de props fonctions qui déclenchent des actions
-// ces props seraont des fonctions
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  openLogOut: () => {
-    dispatch(openLogOut());
+  toggleLogOut: (value) => {
+    dispatch(toggleLogOut(value));
   },
   loadUserProfile: (userId) => {
     dispatch(loadUserProfile(userId));

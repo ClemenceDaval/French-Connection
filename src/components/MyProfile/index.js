@@ -17,7 +17,7 @@ import './myProfile.scss';
 
 const MyProfile = ({
   connectedUserData,
-  openLogOut,
+  toggleLogOut,
   redirect,
   isConnected,
   isMyProfileLoaded,
@@ -34,6 +34,10 @@ const MyProfile = ({
   else {
     name = `${connectedUserData.firstname} ${connectedUserData.lastname}`;
   }
+
+  const openLogOut = () => {
+    toggleLogOut(true);
+  };
 
   return (
     <>
@@ -82,7 +86,7 @@ MyProfile.propTypes = {
       },
     ).isRequired,
   ).isRequired,
-  openLogOut: PropTypes.func.isRequired,
+  toggleLogOut: PropTypes.func.isRequired,
   redirect: PropTypes.func.isRequired,
   isConnected: PropTypes.bool.isRequired,
   isMyProfileLoaded: PropTypes.bool.isRequired,

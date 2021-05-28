@@ -6,7 +6,16 @@ import Field from 'src/components/Field';
 import './signIn.scss';
 
 const SignIn = ({
-  isOpen, close, openLogIn, firstname, lastname, email, password, confirmedPassword, changeField, handleSignIn,
+  signIn,
+  toggleSignIn,
+  toggleLogIn,
+  firstname,
+  lastname,
+  email,
+  password,
+  confirmedPassword,
+  changeField,
+  handleSignIn,
 }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -20,11 +29,20 @@ const SignIn = ({
     }
   };
 
+  const closeSignIn = () => {
+    toggleSignIn(false);
+  };
+
+  const openLogIn = () => {
+    toggleLogIn(true);
+    toggleSignIn(false);
+  };
+
   return (
-    <div className={isOpen ? 'signIn' : 'signIn__close'}>
+    <div className={signIn ? 'signIn' : 'signIn__close'}>
       <div className="signIn__modal">
         <h1 className="signIn__modal__title"> Créez votre compte </h1>
-        <button className="signIn__modal__closeButton" type="button" onClick={close}> X </button>
+        <button className="signIn__modal__closeButton" type="button" onClick={closeSignIn}> X </button>
         <form className="signIn__modal__form" onSubmit={handleSubmit}>
           {errorMessage && (
             <p className="error"> {errorMessage} </p>
@@ -77,9 +95,9 @@ const SignIn = ({
 };
 
 SignIn.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  close: PropTypes.func.isRequired,
-  openLogIn: PropTypes.func.isRequired,
+  signIn: PropTypes.bool.isRequired,
+  toggleSignIn: PropTypes.func.isRequired,
+  toggleLogIn: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   firstname: PropTypes.string.isRequired,

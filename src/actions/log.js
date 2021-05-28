@@ -1,35 +1,3 @@
-// action type CLOSE_SIGN_IN
-export const CLOSE_SIGN_IN = 'CLOSE_SIGN_IN';
-
-// action creator closeSignIn
-export const closeSignIn = () => ({
-  type: CLOSE_SIGN_IN,
-});
-
-// action type OPEN_SIGN_IN
-export const OPEN_SIGN_IN = 'OPEN_SIGN_IN';
-
-// action creator openSignIn
-export const openSignIn = () => ({
-  type: OPEN_SIGN_IN,
-});
-
-// action type CLOSE_LOG_IN
-export const CLOSE_LOG_IN = 'CLOSE_LOG_IN';
-
-// action creator closeLogIn
-export const closeLogIn = () => ({
-  type: CLOSE_LOG_IN,
-});
-
-// action type OPEN_LOG_IN
-export const OPEN_LOG_IN = 'OPEN_LOG_IN';
-
-// action creator openLogIn
-export const openLogIn = () => ({
-  type: OPEN_LOG_IN,
-});
-
 // action type CHANGE_LOG_IN_FIELD_VALUE
 export const CHANGE_LOG_IN_FIELD_VALUE = 'CHANGE_LOG_IN_FIELD_VALUE';
 
@@ -55,22 +23,6 @@ export const SAVE_CONNECTED_USER_DATA = 'SAVE_CONNECTED_USER_DATA';
 export const saveConnectedUserData = (decodedToken) => ({
   type: SAVE_CONNECTED_USER_DATA,
   decodedToken,
-});
-
-// action type OPEN_LOG_OUT
-export const OPEN_LOG_OUT = 'OPEN_LOG_OUT';
-
-// action creator openLogOut
-export const openLogOut = () => ({
-  type: OPEN_LOG_OUT,
-});
-
-// action type CLOSE_LOG_OUT
-export const CLOSE_LOG_OUT = 'CLOSE_LOG_OUT';
-
-// action creator closeLogOut
-export const closeLogOut = () => ({
-  type: CLOSE_LOG_OUT,
 });
 
 // action type LOG_OUT
