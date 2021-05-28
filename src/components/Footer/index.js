@@ -13,7 +13,7 @@ const Footer = () => (
         <NavLink to="/mentions-legales">Mentions légales</NavLink>
       </li>
       <li className="footer__item">
-        <NavLink to="/a-propos">A propos de nous</NavLink>
+        <NavLink to="/a-propos">À propos de nous</NavLink>
       </li>
     </ul>
     <p className="footer__ref"> @2021, French Connection - Clémence, Laurent, Lucas, Thomas & Tom </p>

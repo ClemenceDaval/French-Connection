@@ -1,16 +1,15 @@
 @use 'src/styles/vars';
 
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
 .homePageFonctionnalities{
-  
   display:flex;
   flex-flow: column wrap;
   background-color:vars.$light-grey;
   margin-top:1.5rem;
+  font-size:0.8rem;
 
   @media (min-width: vars.$breakpoint-tablet) {
     flex-flow: row nowrap;
+    font-size:1rem;
   }
 
   @media (min-width: vars.$max-width) {
@@ -41,41 +40,37 @@
     }
 
     &:hover{
-    
+
       @media (min-width: vars.$breakpoint-tablet) {
         background-color:vars.$light-red;
 
         .homePageFonctionnalities__item__text__title{
           color:vars.$light-color;
           text-shadow: none;
-          
-
         }
       }
-
     }
 
-   
     &__image{
     max-width: 80%;
     max-height: 200px;
     margin-bottom: 2rem;
     }
 
-
     &__text{
       &__title{
-        font-size: 2rem;
+        font-size: 2em;
         color: vars.$light-red;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.8rem;
         text-decoration: underline;
         font-family: vars.$font-title;
       }
   
       &__content{
-        font-size: 1.4rem;
+        font-size: 1.3em;
         text-align: justify;
         font-family: vars.$font-text;
+        line-height: 1.8rem;
 
       }
 
