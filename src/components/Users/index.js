@@ -28,6 +28,10 @@ const Users = ({loadUsersCards, usersList, RenderNewList, newUserList, inputValu
     ChangeInputValue(inputValue);
   };
 
+  const onChange = (evt) => {
+    console.log("le pays a changé");
+  };
+
   return (
     <>
       {isLoading && (<Loader />)}
@@ -36,11 +40,10 @@ const Users = ({loadUsersCards, usersList, RenderNewList, newUserList, inputValu
           <div className="users__header">
             <div className="users__header__content">
               <h1 className="users__header__title"> Notre réseau</h1>
-              <div>
-                <p> gfsdfg sdfg sdfg sdfg sdfg sdg sdfg sdfg sdfg sdg sdgsdfg sdfg sfg sdfg sdfg sdfg sdfg sdfg sdfg sdfg </p> 
-                <p> gfsdfg sdfg sdfg sdfg sdfg sdg sdfg sdfg sdfg sdg sdgsdfg sdfg sfg sdfg sdfg sdfg sdfg sdfg sdfg sdfg </p> 
-                <p> gfsdfg sdfg sdfg sdfg sdfg sdg sdfg sdfg sdfg sdg sdgsdfg sdfg sfg sdfg sdfg sdfg sdfg sdfg sdfg sdfg </p> 
-                <p> gfsdfg sdfg sdfg sdfg sdfg sdg sdfg sdfg sdfg sdg sdgsdfg sdfg sfg sdfg sdfg sdfg sdfg sdfg sdfg sdfg </p> 
+              <div className="users__header__text">
+                <p> Découvrez le profil de nos utilisateurs. </p>  
+                <p> Vous recherchez une personne en particulier ? Munissez-vous de son pseudo et utilisez la barre de recherche ci-dessous. </p>
+                <p> Vous pouvez également filtrer les profils pour n'afficher uniquement les helpers.</p>
               </div>
             </div>
             <div className="users__header__image" />
@@ -51,7 +54,6 @@ const Users = ({loadUsersCards, usersList, RenderNewList, newUserList, inputValu
                 <input type="text" className="users__filters__searchBar__input" placeholder="Recherchez un utilisateur" onChange={handleInputValueChange} />
                 <input type="submit" className="users__filters__searchBar__submitButton" value="" />
               </form>
-
               <label htmlFor="byStatusCheckbox" className="users__filters__byStatus__label">
                 Afficher uniquement les helpers
                 <input type="checkbox" className="users__filters__byStatus__checkbox" name="byStatusCheckbox" />

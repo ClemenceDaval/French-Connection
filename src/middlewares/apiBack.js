@@ -58,6 +58,7 @@ export default (store) => (next) => (action) => {
         .then((response) => {
           // on récupère le token et on paramètre axios pour le faire apparaitre dans notre header
           const userToken = (response.data.token);
+          console.log(userToken);
 
           // on stocke le token dans le localStorage
           localStorage.setItem('token', (userToken));
@@ -95,6 +96,7 @@ export default (store) => (next) => (action) => {
           },
         })
         .then((response) => {
+          console.log(userToken);
           // l'API nous retourne les infos de l'utilisateur
           // console.log(response.data);
           const connectedUserInfos = response.data;
