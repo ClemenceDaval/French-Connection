@@ -15,6 +15,7 @@ const UserCard = ({
   avatar,
   isConnected,
   toggleLogIn,
+  createdAt
 }) => {
   let localisation = '';
   if (cities != null) {
@@ -23,6 +24,11 @@ const UserCard = ({
   else {
     localisation = 'Non précisé';
   }
+
+  let creationDate = new Date(createdAt);
+  // console.log(creationDate);
+  creationDate = `${creationDate.getDate()}/${creationDate.getMonth() + 1}/${creationDate.getFullYear()}`;
+  // console.log(creationDate.getMonth());
 
   const openLogIn = () => {
     toggleLogIn(true);
@@ -38,6 +44,7 @@ const UserCard = ({
         <div className={helper ? 'userCard__text__role' : 'userCard__text__role userCard__text__role--hidden'}> HELPER </div>
         <div className="userCard__text__name">{nickname != null ? nickname : `${firstname} ${lastname}`}</div>
         <div className="userCard__text__localisation">{localisation}</div>
+        <div className="userCard__text__date">Membre depuis le {creationDate}</div>
         <div className="userCard__text__link"> Voir le profil </div>
       </div>
     </Link>
