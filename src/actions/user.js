@@ -50,23 +50,24 @@ export const loadUsersReviews = () => ({
   type: LOAD_USERS_REVIEWS,
 });
 
-// action type RENDER_NEW_LIST
-export const RENDER_NEW_LIST = 'RENDER_NEW_LIST';
+// action type RENDER_NEW_USERS_LIST
+export const RENDER_NEW_USERS_LIST = 'RENDER_NEW_USERS_LIST';
 
-// action creator RenderNewList
-export const RenderNewList = (result) => ({
-  type: RENDER_NEW_LIST,
+// action creator renderNewUsersList
+export const renderNewUsersList = (result) => ({
+  type: RENDER_NEW_USERS_LIST,
   result,
 });
 
-// action type CHANGE_INPUTVALUE
-export const CHANGE_INPUTVALUE = 'CHANGE_INPUTVALUE';
+// action type CHANGE_SEARCH_INPUT_VALUE
+export const CHANGE_SEARCH_INPUT_VALUE = 'CHANGE_SEARCH_INPUT_VALUE';
 
-// action creator changeInputValue
-export const changeInputValue = (inputValue) => ({
-  type: CHANGE_INPUTVALUE,
-  inputValue,
+// action creator changeSearchInputValue
+export const changeSearchInputValue = (value) => ({
+  type: CHANGE_SEARCH_INPUT_VALUE,
+  value,
 });
+
 // action type SET_LOADING
 export const SET_LOADING = 'SET_LOADING';
 
@@ -74,4 +75,12 @@ export const SET_LOADING = 'SET_LOADING';
 export const setLoading = (value) => ({
   type: SET_LOADING,
   value,
+});
+
+// action type TOGGLE_HELPER_ONLY_CHECKBOX
+export const TOGGLE_HELPER_ONLY_CHECKBOX = 'TOGGLE_HELPER_ONLY_CHECKBOX';
+
+// action creator toggleHelperOnlyCheckbox
+export const toggleHelperOnlyCheckbox = () => ({
+  type: TOGGLE_HELPER_ONLY_CHECKBOX,
 });

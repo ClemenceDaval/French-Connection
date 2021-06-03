@@ -1,17 +1,16 @@
 import { connect } from 'react-redux';
 
 import Users from 'src/components/Users';
-import { loadUsersCards, RenderNewList, changeInputValue } from 'src/actions/user';
+import { loadUsersCards, renderNewUsersList, changeSearchInputValue, toggleHelperOnlyCheckbox } from 'src/actions/user';
 
 // connection de props en lecture sur le state
 // ces props seront des tableaux, objets, booléens, numériques, string
 const mapStateToProps = (state, ownProps) => ({
   usersList: state.user.usersList,
   newUserList: state.user.newUserList,
-
-  inputValue: state.user.inputValue,
+  searchValue: state.user.searchValue,
   isLoading: state.user.isLoading,
-
+  helperOnly: state.user.helperOnly,
 });
 
 // connection de props fonctions qui déclenchent des actions
@@ -20,11 +19,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   loadUsersCards: () => {
     dispatch(loadUsersCards());
   },
-  RenderNewList: (result) => {
-    dispatch(RenderNewList(result));
+  renderNewUsersList: (result) => {
+    dispatch(renderNewUsersList(result));
   },
-  ChangeInputValue: (inputValue) => {
-    dispatch(changeInputValue(inputValue));
+  onChange: (value) => {
+    dispatch(changeSearchInputValue(value));
+  },
+  toggleHelperOnlyCheckbox: () => {
+    dispatch(toggleHelperOnlyCheckbox());
   },
 });
 

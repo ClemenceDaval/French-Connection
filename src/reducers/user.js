@@ -1,10 +1,11 @@
 import {
   SAVE_USER_PROFILE,
   SAVE_USERS_CARDS,
-  RENDER_NEW_LIST,
-  CHANGE_INPUTVALUE,
+  RENDER_NEW_USERS_LIST,
+  CHANGE_SEARCH_INPUT_VALUE,
   SET_LOADING,
   SAVE_USERS_REVIEWS,
+  TOGGLE_HELPER_ONLY_CHECKBOX,
 } from 'src/actions/user';
 
 const initialState = {
@@ -18,7 +19,8 @@ const initialState = {
   newUserList: null,
   usersReviewList: [],
   myHobbies: {},
-  inputValue: null,
+  searchValue: '',
+  helperOnly: false,
 };
 
 export default (state = initialState, action = {}) => {
@@ -33,15 +35,15 @@ export default (state = initialState, action = {}) => {
         ...state,
         usersList: action.usersList,
       };
-    case RENDER_NEW_LIST:
+    case RENDER_NEW_USERS_LIST:
       return {
         ...state,
         newUserList: action.result,
       };
-    case CHANGE_INPUTVALUE:
+    case CHANGE_SEARCH_INPUT_VALUE:
       return {
         ...state,
-        inputValue: action.inputValue,
+        searchValue: action.value,
       };
     case SET_LOADING:
       return {
@@ -52,6 +54,11 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         usersReviewList: action.usersReviewList,
+      };
+    case TOGGLE_HELPER_ONLY_CHECKBOX:
+      return {
+        ...state,
+        helperOnly: !state.helperOnly,
       };
     default:
       return state;
