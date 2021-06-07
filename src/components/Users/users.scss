@@ -30,7 +30,14 @@
     }
 
     &__content{
-      width:60%;
+      width:90%;
+
+      @media (min-width: vars.$breakpoint-phone) {
+        width: 80%;
+      }
+      @media (min-width: vars.$breakpoint-tablet) {
+        width: 60%;
+      }
     }
 
     &__title{
