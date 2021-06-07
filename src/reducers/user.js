@@ -16,7 +16,7 @@ const initialState = {
   userAddress: '',
   userCityCenter: '',
   isLoading: true,
-  newUserList: null,
+  newUserList: [],
   usersReviewList: [],
   myHobbies: {},
   searchValue: '',
@@ -58,7 +58,7 @@ export default (state = initialState, action = {}) => {
     case TOGGLE_HELPER_ONLY_CHECKBOX:
       return {
         ...state,
-        helperOnly: !state.helperOnly,
+        helperOnly: action.value,
       };
     default:
       return state;

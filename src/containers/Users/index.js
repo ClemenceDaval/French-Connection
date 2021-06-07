@@ -22,11 +22,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   renderNewUsersList: (result) => {
     dispatch(renderNewUsersList(result));
   },
-  onChange: (value) => {
+  changeInputValue: (value) => {
     dispatch(changeSearchInputValue(value));
   },
-  toggleHelperOnlyCheckbox: () => {
-    dispatch(toggleHelperOnlyCheckbox());
+  toggleHelperOnlyCheckbox: (value) => {
+    dispatch(toggleHelperOnlyCheckbox(value));
   },
 });
 

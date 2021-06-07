@@ -81,6 +81,7 @@ export const setLoading = (value) => ({
 export const TOGGLE_HELPER_ONLY_CHECKBOX = 'TOGGLE_HELPER_ONLY_CHECKBOX';
 
 // action creator toggleHelperOnlyCheckbox
-export const toggleHelperOnlyCheckbox = () => ({
+export const toggleHelperOnlyCheckbox = (value) => ({
   type: TOGGLE_HELPER_ONLY_CHECKBOX,
+  value,
 });
