@@ -33,7 +33,11 @@ ProfileButton.propTypes = {
   type: PropTypes.string.isRequired,
   textContent: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  linkTo: PropTypes.string.isRequired,
+  linkTo: PropTypes.string,
+};
+
+ProfileButton.defaultProps = {
+  linkTo: '',
 };
 
 export default ProfileButton;

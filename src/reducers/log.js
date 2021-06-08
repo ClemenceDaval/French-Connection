@@ -35,7 +35,7 @@ const initialState = {
   isConnected: 'checking',
   email: '',
   password: '',
-  connectedUserData: '',
+  connectedUserData: {},
   isLoading: true,
   selectedHobby: {},
   selectedService: {},

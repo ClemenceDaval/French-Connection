@@ -70,7 +70,7 @@ ModifyMyServices.propTypes = {
     PropTypes.shape(
       {
         id: PropTypes.number.isRequired,
-        name: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
       },
     ),
   ).isRequired,

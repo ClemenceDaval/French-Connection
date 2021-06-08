@@ -39,8 +39,6 @@ const MyProfile = ({
     toggleLogOut(true);
   };
 
-  console.log(isMyProfileLoaded);
-
   return (
     <>
       {isMyProfileLoaded === 'checking' && <Loader /> }
@@ -80,19 +78,18 @@ const MyProfile = ({
 };
 
 MyProfile.propTypes = {
-  connectedUserData: PropTypes.objectOf(
-    PropTypes.shape(
-      {
-        nickname: PropTypes.string.isRequired,
-        firstname: PropTypes.string.isRequired,
-        lastname: PropTypes.string.isRequired,
-      },
-    ).isRequired,
+  connectedUserData: PropTypes.shape(
+    {
+      nickname: PropTypes.string,
+      firstname: PropTypes.string,
+      lastname: PropTypes.string,
+    },
   ).isRequired,
   toggleLogOut: PropTypes.func.isRequired,
   redirect: PropTypes.func.isRequired,
   isConnected: PropTypes.oneOf(['checking', true, false]).isRequired,
   isMyProfileLoaded: PropTypes.oneOf(['checking', true, false]).isRequired,
 };
+
 
 export default MyProfile;
