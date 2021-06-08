@@ -60,13 +60,12 @@ const MyProfile = ({
               <ProfileDescription {...connectedUserData} isMyProfile name={name} />
               <ProfileHobbies {...connectedUserData} isMyProfile name={name} />
               <ProfileServices {...connectedUserData} isMyProfile name={name} />
+              <div className="myProfile__buttons">
+                <ProfileButton type="link" textContent="Me déconnecter" color="blue" linkTo="/mon-profil" onClick={openLogOut} />
+                <ProfileButton type="hashlink" textContent="Devenez helper" color="red" linkTo="/mon-profil/modifier/#helperSection" />
+                <ProfileButton type="link" textContent="Modifier mon profil" color="red" linkTo="/mon-profil/modifier" />
+              </div>
             </div>
-          </div>
-
-          <div className="myProfile__buttons">
-            <ProfileButton type="link" textContent="Me déconnecter" color="blue" linkTo="/mon-profil" onClick={openLogOut} />
-            <ProfileButton type="hashlink" textContent="Devenez helper" color="red" linkTo="/mon-profil/modifier/#helperSection" />
-            <ProfileButton type="link" textContent="Modifier mon profil" color="red" linkTo="/mon-profil/modifier" />
           </div>
         </div>
       )}

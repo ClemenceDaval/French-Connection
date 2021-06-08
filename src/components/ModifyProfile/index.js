@@ -239,7 +239,7 @@ const ModifyProfile = ({
               </div>
 
               <div className="modifyProfile__form__section">
-                <h2 className="modifyProfile__form__section__title"> A propos de vous </h2>
+                <h2 className="modifyProfile__form__section__title"> À propos de vous </h2>
                 <div className="modifyProfile__form__section__content">
 
                   <div className="modifyProfile__form__subsection">
