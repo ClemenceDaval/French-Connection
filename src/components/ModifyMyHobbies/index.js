@@ -49,9 +49,20 @@ const ModifyMyHobbies = ({
       <div className="modifyMyHobbies__select">
         <select onChange={onChange}>
           <option className="modifyMyHobbies__option"> Choisissez un centre d'interêt</option>
-          {hobbiesList.map((hobby) => (
-            <option key={hobby.name} value={`${hobby.id}-${hobby.name}`}> {hobby.name} </option>
-          ))};
+          {hobbiesList.map((hobby) => {
+            let correspondance = 0;
+            myHobbies.map((myHobby) => {
+              if (myHobby.id === hobby.id) {
+                correspondance += 1;
+                console.log('il y a une correspondance !');
+              }
+            });
+            if (correspondance === 0) {
+              return (
+                <option key={hobby.name} value={`${hobby.id}-${hobby.name}`}> {hobby.name} </option>
+              );
+            }
+          })};
         </select>
         <button className="modifyMyHobbies__select__addButton" type="button" onClick={onClick}>Ajouter</button>
       </div>
