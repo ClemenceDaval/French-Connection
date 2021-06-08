@@ -10,11 +10,11 @@ import {
 } from 'src/actions/log';
 
 import {
-  ADD_SELECTED_HOBBY, SAVE_SELECTED_HOBBY, REMOVE_HOBBY
+  ADD_SELECTED_HOBBY, SAVE_SELECTED_HOBBY, REMOVE_HOBBY,
 } from 'src/actions/hobbies';
 
 import {
-  ADD_SELECTED_SERVICE, SAVE_SELECTED_SERVICE,
+  ADD_SELECTED_SERVICE, SAVE_SELECTED_SERVICE, REMOVE_SERVICE,
 } from 'src/actions/services';
 
 import {
@@ -136,6 +136,14 @@ export default (state = initialState, action = {}) => {
         connectedUserData: {
           ...state.connectedUserData,
           services: [...state.connectedUserData.services, action.selectedService],
+        },
+      };
+    case REMOVE_SERVICE:
+      return {
+        ...state,
+        connectedUserData: {
+          ...state.connectedUserData,
+          services: action.newServicesList,
         },
       };
     case RESET_PASSWORD:

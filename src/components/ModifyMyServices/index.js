@@ -12,6 +12,7 @@ const ModifyMyServices = ({
   saveSelectedService,
   selectedService,
   addSelectedService,
+  removeService,
 }) => {
   // console.log(myServices);
   // console.log(myServicesArray);
@@ -32,8 +33,21 @@ const ModifyMyServices = ({
     addSelectedService(selectedService);
   };
 
-  console.log(myServices);
-  console.log(servicesList);
+  const clickToRemoveService = (evt) => {
+    const serviceToRemove = parseInt(evt.target.value, 10);
+    console.log('id de service a remove');
+    console.log(serviceToRemove);
+    console.log('myServices');
+    console.log(myServices);
+    const myNewServicesList = myServices.filter((service) => {
+      console.log('service.id');
+      console.log(service.id);
+      return (service.id !== serviceToRemove);
+    });
+    console.log('nouvelle liste des hobbies');
+    console.log(myNewServicesList);
+    removeService(myNewServicesList);
+  };
 
   return (
 
@@ -42,20 +56,32 @@ const ModifyMyServices = ({
       <div className="modifyMyServices__emptySection">
         { myServices.length === 0 ? 'Vous ne proposez pas de services.' : ''}
       </div>
-      <ul className="modifyMyServices__list">
-        {myServices.map((service) => (
-          <li key={`myServices-${service.name}`} className="modifyMyServices__list__item">
-            <div className={`modifyMyServices__list__item__text services-${service.id}`}> {service.name} </div>
-            <button className="modifyMyServices__list__item__removeButton" type="button"> Retirer </button>
-          </li>
-        ))}
-      </ul>
+      { myServices.length !== 0 && (
+        <ul className="modifyMyServices__list">
+          {myServices.map((service) => (
+            <li key={`myServices-${service.name}`} className="modifyMyServices__list__item">
+              <div className={`modifyMyServices__list__item__text services-${service.id}`}> {service.name} </div>
+              <button className="modifyMyServices__list__item__removeButton" type="button" value={service.id} onClick={clickToRemoveService}> Retirer </button>
+            </li>
+          ))}
+        </ul>
+      )}
       <div className="modifyMyServices__select">
         <select onChange={onChange}>
-          <option> Choisissez un service</option>
-          {servicesList.map((service) => (
-            <option key={service.name} value={`${service.id}-${service.name}`}> {service.name} </option>
-          ))};
+          {servicesList.map((service) => {
+            let correspondance = 0;
+            myServices.map((myService) => {
+              if (myService.id === service.id) {
+                correspondance += 1;
+                console.log('il y a une correspondance !');
+              }
+            });
+            if (correspondance === 0) {
+              return (
+                <option key={service.name} value={`${service.id}-${service.name}`}> {service.name} </option>
+              );
+            }
+          })};
         </select>
         <button className="modifyMyServices__select__addButton" type="button" onClick={onClick}>Ajouter</button>
       </div>
