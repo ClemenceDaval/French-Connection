@@ -10,7 +10,7 @@ import {
 } from 'src/actions/log';
 
 import {
-  ADD_SELECTED_HOBBY, SAVE_SELECTED_HOBBY,
+  ADD_SELECTED_HOBBY, SAVE_SELECTED_HOBBY, REMOVE_HOBBY
 } from 'src/actions/hobbies';
 
 import {
@@ -111,6 +111,14 @@ export default (state = initialState, action = {}) => {
         connectedUserData: {
           ...state.connectedUserData,
           hobbies: [...state.connectedUserData.hobbies, action.selectedHobby],
+        },
+      };
+    case REMOVE_HOBBY:
+      return {
+        ...state,
+        connectedUserData: {
+          ...state.connectedUserData,
+          hobbies: action.newHobbiesList,
         },
       };
     case SAVE_SELECTED_SERVICE:

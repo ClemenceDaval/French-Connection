@@ -11,6 +11,7 @@ const ModifyMyHobbies = ({
   saveSelectedHobby,
   selectedHobby,
   addSelectedHobby,
+  removeHobby,
 }) => {
   console.log(myHobbies);
 
@@ -30,6 +31,22 @@ const ModifyMyHobbies = ({
     addSelectedHobby(selectedHobby);
   };
 
+  const clickToRemoveHobby = (evt) => {
+    const hobbyToRemove = parseInt(evt.target.value, 10);
+    console.log('id de hobby a remove');
+    console.log(hobbyToRemove);
+    console.log('myHobbies');
+    console.log(myHobbies);
+    const myNewHobbiesList = myHobbies.filter((hobby) => {
+      console.log('hobby.id');
+      console.log(hobby.id);
+      return (hobby.id !== hobbyToRemove);
+    });
+    console.log('nouvelle liste des hobbies');
+    console.log(myNewHobbiesList);
+    removeHobby(myNewHobbiesList);
+  };
+
   return (
     <div className="modifyProfile__form__subsection">
       <div className="modifyProfile__form__subsection__title"> Mes centres d'intérêts </div>
@@ -41,7 +58,7 @@ const ModifyMyHobbies = ({
           {myHobbies.map((hobby) => (
             <li key={`myHobbies-${hobby.name}`} className="modifyMyHobbies__list__item">
               <div className={`modifyMyHobbies__list__item__text hobbies-${hobby.id}`}> {hobby.name} </div>
-              <button className="modifyMyHobbies__list__item__removeButton" type="button"> Retirer </button>
+              <button className="modifyMyHobbies__list__item__removeButton" type="button" value={hobby.id} onClick={clickToRemoveHobby}> Retirer </button>
             </li>
           ))}
         </ul>
