@@ -80,6 +80,7 @@ export default (store) => (next) => (action) => {
           toast.info('Vous êtes maintenant connectés');
         }).catch((error) => {
           console.log('Vous n\'avez pas pu être identifié');
+          
         });
       next(action);
       break;
@@ -107,6 +108,7 @@ export default (store) => (next) => (action) => {
           store.dispatch(setMyProfileLoading(true));
           // console.log('la requête seffectue');
         }).catch((error) => {
+          store.dispatch(setMyProfileLoading(false));
           // eslint-disable-next-line no-console
           const errorStatus = error.response.status;
           // console.log(error.response.status);

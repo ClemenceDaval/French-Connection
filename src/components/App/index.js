@@ -67,6 +67,7 @@ const App = ({
     }
     else {
       console.log('je ne suis pas encore connecté');
+      setIsConnected(false);
     }
   }, []);
 

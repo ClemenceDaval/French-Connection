@@ -35,7 +35,7 @@ const UserCard = ({
   };
 
   return (
-    <Link to={isConnected ? `/notre-reseau/utilisateur/${id}` : 'notre-reseau'} className="userCard" onClick={isConnected ? '' : openLogIn}>
+    <Link to={isConnected === true ? `/notre-reseau/utilisateur/${id}` : 'notre-reseau'} className="userCard" onClick={isConnected === true ? '' : openLogIn}>
       <div className="userCard__picture">
         <img alt={`Avatar de ${firstname} ${lastname}`} className={avatar === null ? 'hidden' : ''} src={`http://ec2-34-239-254-34.compute-1.amazonaws.com/images/avatars/${avatar}`} />
         <img alt="Avatar par défaut" className={avatar !== null ? 'hidden' : ''} src={defaultAvatar} />

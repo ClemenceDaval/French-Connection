@@ -32,7 +32,7 @@ import {
 import { SET_MY_PROFILE_LOADING } from 'src/actions/loading';
 
 const initialState = {
-  isConnected: false,
+  isConnected: 'checking',
   email: '',
   password: '',
   connectedUserData: '',
@@ -42,7 +42,7 @@ const initialState = {
   newPassword: '',
   confirmedNewPassword: '',
   redirectionToMyProfile: false,
-  isMyProfileLoaded: false,
+  isMyProfileLoaded: 'checking',
   newAddress: '',
   completeNewAddress: [],
   avatarFile: null,

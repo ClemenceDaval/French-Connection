@@ -108,7 +108,7 @@ const ModifyProfile = ({
 
   return (
     <>
-      {!isConnected && <Redirect to="/" />}
+      {isConnected === false && <Redirect to="/" />}
       {redirection && <Redirect to="/mon-profil" />}
 
       <div className="modifyProfile">
@@ -223,9 +223,9 @@ const ModifyProfile = ({
                 <h3 className="modifyProfile__form__subsection__title"> Votre ville de résidence </h3>
                 <div className="modifyProfile__form__label">
                   <div className="modifyProfile__form__city">
-                    {connectedUserData.cities === null && completeNewAddress.length === 0 ? 'Vous n\'avez pas renseigné votre ville de résidence' : ''}
+                    {/* {connectedUserData.cities === null && completeNewAddress.length === 0 ? 'Vous n\'avez pas renseigné votre ville de résidence' : ''}
                     {connectedUserData.cities !== null && completeNewAddress.length === 0 ? `Votre ville de résidence est ${connectedUserData.cities.name}, ${connectedUserData.cities.country.frenchName}.` : ''}
-                    {completeNewAddress.length !== 0 ? `Votre ville de résidence est ${completeNewAddress[0]}, ${completeNewAddress[1]}.` : ''}
+                    {completeNewAddress.length !== 0 ? `Votre ville de résidence est ${completeNewAddress[0]}, ${completeNewAddress[1]}.` : ''} */}
                   </div>
                   <button className="modifyProfile__form__city__button" type="button" onClick={openModifyCityModal}> Changer de ville </button>
                   <ModifyCity />

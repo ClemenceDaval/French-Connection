@@ -18,7 +18,7 @@ const ResultsProfile = ({
   };
 
   return (
-    <Link to={isConnected ? `/notre-reseau/utilisateur/${id}` : '/resultats'} className="resultsProfile__Card" onClick={isConnected ? '' : openLogIn}>
+    <Link to={isConnected === true ? `/notre-reseau/utilisateur/${id}` : '/resultats'} className="resultsProfile__Card" onClick={isConnected === true ? '' : openLogIn}>
       <div className="resultsProfile">
         <div className="resultsProfile__picture">
           <img src={`http://ec2-34-239-254-34.compute-1.amazonaws.com/images/avatars/${avatar}`} alt={`avatar de ${firstname} ${lastname}`} className="resultsProfile__Picture" />

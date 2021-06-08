@@ -39,13 +39,13 @@ const MyProfile = ({
     toggleLogOut(true);
   };
 
+  console.log(isMyProfileLoaded);
+
   return (
     <>
-      {!isMyProfileLoaded && <Loader /> }
+      {isMyProfileLoaded === 'checking' && <Loader /> }
 
-      {!isConnected && <Redirect to="/" />}
-
-      {isMyProfileLoaded && isConnected && (
+      {isMyProfileLoaded === true && (
 
         <div className="myProfile">
 
@@ -72,6 +72,9 @@ const MyProfile = ({
           </div>
         </div>
       )}
+
+      {isConnected === false && <Redirect to="/" />}
+
     </>
   );
 };
