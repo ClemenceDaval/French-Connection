@@ -68,7 +68,7 @@ UserCard.propTypes = {
       ),
     },
   ),
-  isConnected: PropTypes.bool.isRequired,
+  isConnected: PropTypes.oneOf(['checking', true, false]).isRequired,
   toggleLogIn: PropTypes.func.isRequired,
 };
 

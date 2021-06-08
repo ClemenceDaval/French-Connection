@@ -305,7 +305,7 @@ ModifyProfile.propTypes = {
   loadServicesList: PropTypes.func.isRequired,
   toggleModifyCityModal: PropTypes.func.isRequired,
   redirection: PropTypes.bool.isRequired,
-  isConnected: PropTypes.bool.isRequired,
+  isConnected: PropTypes.oneOf(['checking', true, false]).isRequired,
 };
 
 export default ModifyProfile;

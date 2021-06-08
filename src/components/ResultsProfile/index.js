@@ -40,7 +40,7 @@ ResultsProfile.propTypes = {
   biography: PropTypes.string.isRequired,
   nickname: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
-  isConnected: PropTypes.bool.isRequired,
+  isConnected: PropTypes.oneOf(['checking', true, false]).isRequired,
   toggleLogIn: PropTypes.func.isRequired,
 };
 

@@ -91,8 +91,8 @@ MyProfile.propTypes = {
   ).isRequired,
   toggleLogOut: PropTypes.func.isRequired,
   redirect: PropTypes.func.isRequired,
-  isConnected: PropTypes.bool.isRequired,
-  isMyProfileLoaded: PropTypes.bool.isRequired,
+  isConnected: PropTypes.oneOf(['checking', true, false]).isRequired,
+  isMyProfileLoaded: PropTypes.oneOf(['checking', true, false]).isRequired,
 };
 
 export default MyProfile;
