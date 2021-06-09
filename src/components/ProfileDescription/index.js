@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './profileDescription.scss';
+
 const ProfileDescription = ({ biography, name, isMyProfile }) => {
   let emptyMessage = `${name} n'a pas rempli sa biographie.`;
   if (isMyProfile) {
@@ -11,7 +13,7 @@ const ProfileDescription = ({ biography, name, isMyProfile }) => {
   return (
     <div className="profileDescription card">
       <div className="card__title"> À propos de moi </div>
-      <div className="card__text"> {biography !== null ? biography : emptyMessage} </div>
+      <div className="card__text biography"> {biography !== null ? biography : emptyMessage} </div>
     </div>
   );
 };

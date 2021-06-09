@@ -15,6 +15,7 @@ const UserCard = ({
   avatar,
   isConnected,
   toggleLogIn,
+  createdAt
 }) => {
   let localisation = '';
   if (cities != null) {
@@ -24,12 +25,17 @@ const UserCard = ({
     localisation = 'Non précisé';
   }
 
+  let creationDate = new Date(createdAt);
+  // console.log(creationDate);
+  creationDate = `${creationDate.getDate()}/${creationDate.getMonth() + 1}/${creationDate.getFullYear()}`;
+  // console.log(creationDate.getMonth());
+
   const openLogIn = () => {
     toggleLogIn(true);
   };
 
   return (
-    <Link to={isConnected ? `/notre-reseau/utilisateur/${id}` : 'notre-reseau'} className="userCard" onClick={isConnected ? '' : openLogIn}>
+    <Link to={isConnected === true ? `/notre-reseau/utilisateur/${id}` : 'notre-reseau'} className="userCard" onClick={isConnected === true ? '' : openLogIn}>
       <div className="userCard__picture">
         <img alt={`Avatar de ${firstname} ${lastname}`} className={avatar === null ? 'hidden' : ''} src={`http://ec2-34-239-254-34.compute-1.amazonaws.com/images/avatars/${avatar}`} />
         <img alt="Avatar par défaut" className={avatar !== null ? 'hidden' : ''} src={defaultAvatar} />
@@ -38,6 +44,7 @@ const UserCard = ({
         <div className={helper ? 'userCard__text__role' : 'userCard__text__role userCard__text__role--hidden'}> HELPER </div>
         <div className="userCard__text__name">{nickname != null ? nickname : `${firstname} ${lastname}`}</div>
         <div className="userCard__text__localisation">{localisation}</div>
+        <div className="userCard__text__date">Membre depuis le {creationDate}</div>
         <div className="userCard__text__link"> Voir le profil </div>
       </div>
     </Link>
@@ -61,7 +68,7 @@ UserCard.propTypes = {
       ),
     },
   ),
-  isConnected: PropTypes.bool.isRequired,
+  isConnected: PropTypes.oneOf(['checking', true, false]).isRequired,
   toggleLogIn: PropTypes.func.isRequired,
 };
 

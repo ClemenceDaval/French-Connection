@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import ModifyMyServices from 'src/components/ModifyMyServices';
 
-import { saveSelectedService, addSelectedService } from 'src/actions/services';
+import { saveSelectedService, addSelectedService, removeService } from 'src/actions/services';
 
 // connection de props en lecture sur le state
 // ces props seront des tableaux, objets, booléens, numériques, string
@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   addSelectedService: (service) => {
     dispatch(addSelectedService(service));
+  },
+  removeService: (newServicesList) => {
+    dispatch(removeService(newServicesList));
   },
 });
 

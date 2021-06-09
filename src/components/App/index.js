@@ -24,7 +24,7 @@ import Page404 from 'src/components/Page404';
 import Page403 from 'src/components/Page403';
 import Profile from 'src/containers/Profile';
 import MyProfile from 'src/containers/MyProfile';
-import UsersCards from 'src/containers/UsersCards';
+import Users from 'src/containers/Users';
 import ModifyProfile from 'src/containers/ModifyProfile';
 import LegalsMentions from 'src/components/LegalsMentions';
 import SiteMap from 'src/components/SiteMap';
@@ -67,6 +67,7 @@ const App = ({
     }
     else {
       console.log('je ne suis pas encore connecté');
+      setIsConnected(false);
     }
   }, []);
 
@@ -95,7 +96,7 @@ const App = ({
           <Results />
         </Route>
         <Route path="/notre-reseau" exact>
-          <UsersCards />
+          <Users />
         </Route>
         <Route path="/notre-reseau/utilisateur/:id" exact>
           <Profile />

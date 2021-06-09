@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import ModifyMyHobbies from 'src/components/ModifyMyHobbies';
 
-import { saveSelectedHobby, addSelectedHobby } from 'src/actions/hobbies';
+import { saveSelectedHobby, addSelectedHobby, removeHobby } from 'src/actions/hobbies';
 
 // connection de props en lecture sur le state
 // ces props seront des tableaux, objets, booléens, numériques, string
@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   addSelectedHobby: (hobby) => {
     dispatch(addSelectedHobby(hobby));
+  },
+  removeHobby: (newHobbiesList) => {
+    dispatch(removeHobby(newHobbiesList));
   },
 });
 

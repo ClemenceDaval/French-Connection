@@ -41,11 +41,9 @@ const MyProfile = ({
 
   return (
     <>
-      {!isMyProfileLoaded && <Loader /> }
+      {isMyProfileLoaded === 'checking' && <Loader /> }
 
-      {!isConnected && <Redirect to="/" />}
-
-      {isMyProfileLoaded && isConnected && (
+      {isMyProfileLoaded === true && (
 
         <div className="myProfile">
 
@@ -62,34 +60,35 @@ const MyProfile = ({
               <ProfileDescription {...connectedUserData} isMyProfile name={name} />
               <ProfileHobbies {...connectedUserData} isMyProfile name={name} />
               <ProfileServices {...connectedUserData} isMyProfile name={name} />
+              <div className="myProfile__buttons">
+                <ProfileButton type="link" textContent="Me déconnecter" color="blue" linkTo="/mon-profil" onClick={openLogOut} />
+                <ProfileButton type="hashlink" textContent="Devenez helper" color="red" linkTo="/mon-profil/modifier/#helperSection" />
+                <ProfileButton type="link" textContent="Modifier mon profil" color="red" linkTo="/mon-profil/modifier" />
+              </div>
             </div>
-          </div>
-
-          <div className="myProfile__buttons">
-            <ProfileButton type="link" textContent="Me déconnecter" color="blue" linkTo="/mon-profil" onClick={openLogOut} />
-            <ProfileButton type="hashlink" textContent="Devenez helper" color="red" linkTo="/mon-profil/modifier/#helperSection" />
-            <ProfileButton type="link" textContent="Modifier mon profil" color="red" linkTo="/mon-profil/modifier" />
           </div>
         </div>
       )}
+
+      {isConnected === false && <Redirect to="/" />}
+
     </>
   );
 };
 
 MyProfile.propTypes = {
-  connectedUserData: PropTypes.objectOf(
-    PropTypes.shape(
-      {
-        nickname: PropTypes.string.isRequired,
-        firstname: PropTypes.string.isRequired,
-        lastname: PropTypes.string.isRequired,
-      },
-    ).isRequired,
+  connectedUserData: PropTypes.shape(
+    {
+      nickname: PropTypes.string,
+      firstname: PropTypes.string,
+      lastname: PropTypes.string,
+    },
   ).isRequired,
   toggleLogOut: PropTypes.func.isRequired,
   redirect: PropTypes.func.isRequired,
-  isConnected: PropTypes.bool.isRequired,
-  isMyProfileLoaded: PropTypes.bool.isRequired,
+  isConnected: PropTypes.oneOf(['checking', true, false]).isRequired,
+  isMyProfileLoaded: PropTypes.oneOf(['checking', true, false]).isRequired,
 };
+
 
 export default MyProfile;

@@ -1,0 +1,190 @@
+@use 'src/styles/_vars';
+
+.users{
+  margin-top:4rem;
+  width:100%;
+
+  @media (min-width: vars.$breakpoint-tablet) {
+    margin-top:2rem;
+  }
+
+  &__header{
+
+    display:flex ;
+    width:90%;
+    margin:auto;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    font-size: 1rem;
+
+    @media (min-width: vars.$breakpoint-tablet) {
+      flex-direction: row;
+      font-size:1.1rem;
+    }
+    @media (min-width: vars.$breakpoint-desktop) {
+      font-size:1.2rem;
+    }
+    @media (min-width: vars.$max-width) {
+      width: vars.$max-width;
+    }
+
+    &__content{
+      width:90%;
+
+      @media (min-width: vars.$breakpoint-phone) {
+        width: 80%;
+      }
+      @media (min-width: vars.$breakpoint-tablet) {
+        width: 60%;
+      }
+    }
+
+    &__title{
+      font-weight: 700;
+      font-size: 2em;
+      //padding-top: 6em;
+      padding-bottom: 3rem;
+      text-align: center;
+      width: 100%;
+      font-family: vars.$font-title;
+    }
+
+    &__text{
+      font-family: vars.$font-text;
+      width: 100%;
+      text-align: center;
+      margin:auto;
+      font-size:1em;
+      line-height: 1.2em;
+
+      @media (min-width: vars.$breakpoint-tablet) {
+        width: 70%;
+      }
+    }
+
+    &__image{
+      width:70%;
+      // background-color: red;
+      background-image: url("src/assets/images/cherry-732.svg"); 
+      background-repeat: no-repeat;
+      background-size:120%;
+      background-position:left;
+      height:300px;
+
+      @media (min-width: vars.$breakpoint-tablet) {
+        width:40%;
+      }
+    }
+
+  }
+
+  &__filters{
+
+    width: 100%;
+    background-color: vars.$light-red;
+    margin: 3rem 0 6rem;
+
+    &__container{
+      width:90%;
+      margin:auto;
+      padding:0 2rem;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      @media (min-width: vars.$breakpoint-desktop) {
+        flex-direction:row;
+      }
+
+      @media (min-width: vars.$max-width) {
+        width: vars.$max-width;
+        padding:0;
+      }
+    }
+
+    &__searchBar{
+      border-radius: 40px;
+      width: 80%;
+      background-color: vars.$light-grey;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 40px;
+      height: 2.5rem;
+      display:flex;
+      flex-direction:row;
+      justify-content: space-between;
+      margin:2rem;
+
+      @media (min-width: vars.$breakpoint-desktop) {
+        width:45%;
+      }
+    
+      &__input{
+        border:none;
+        padding-left: 1em;
+        padding-right: 10%;
+        font-size: 1rem;
+        color: black;
+        background-color: transparent;
+        width:85%;
+    
+        @media(min-width: vars.$breakpoint-tablet) {
+          font-size:1.25rem;
+        }
+      }
+    
+      &__submitButton{
+        background-image: url("src/assets/pictures/search.png");
+        background-position: 50%;
+        background-repeat: no-repeat;
+        border: none;
+        height: 100%;
+        width:2rem;
+        margin-right:1rem;
+        cursor: pointer;
+        border-radius: 40%;
+      }
+    }
+
+    &__byStatus{
+      &__label{
+        color:vars.$light-color;
+        font-size:1.3rem;
+        margin: 0rem 2rem 2rem;
+        padding: 0;
+        font-weight: bold;
+
+        @media(min-width: vars.$breakpoint-desktop) {
+          margin: 2rem 2rem;
+        }
+      }
+    }
+  }
+
+  &__list{
+    
+    padding-bottom:5em;
+    display:flex;
+    flex-direction: column;
+    width: 80%;
+    margin:auto;
+
+    @media only screen and (min-width: vars.$breakpoint-phone) {
+      flex-direction: row;
+      flex-wrap:wrap;
+      justify-content:space-evenly;
+      width: 90%;
+    }
+
+    @media only screen and (min-width: vars.$breakpoint-desktop) {
+      flex-direction: row;
+      flex-wrap:wrap;
+      justify-content:space-evenly;
+    }
+
+    @media (min-width: vars.$max-width) {
+      width: vars.$max-width;
+    }
+  }
+}

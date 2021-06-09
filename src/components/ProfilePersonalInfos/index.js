@@ -8,7 +8,7 @@ const ProfilePersonalInfos = ({
   firstname, lastname, email, cities, phoneNumber,
 }) => {
   let localisation = '';
-  if (cities !== null){
+  if (cities !== null) {
     localisation = `${cities.name}, ${cities.country.frenchName}`;
   };
   console.log(localisation);
@@ -32,7 +32,8 @@ ProfilePersonalInfos.propTypes = {
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  phoneNumber: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  phoneNumber: PropTypes.string,
 };
 
 export default ProfilePersonalInfos;

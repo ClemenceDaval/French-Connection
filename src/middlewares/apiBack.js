@@ -58,6 +58,7 @@ export default (store) => (next) => (action) => {
         .then((response) => {
           // on récupère le token et on paramètre axios pour le faire apparaitre dans notre header
           const userToken = (response.data.token);
+          console.log(userToken);
 
           // on stocke le token dans le localStorage
           localStorage.setItem('token', (userToken));
@@ -79,6 +80,7 @@ export default (store) => (next) => (action) => {
           toast.info('Vous êtes maintenant connectés');
         }).catch((error) => {
           console.log('Vous n\'avez pas pu être identifié');
+          
         });
       next(action);
       break;
@@ -95,6 +97,7 @@ export default (store) => (next) => (action) => {
           },
         })
         .then((response) => {
+          console.log(userToken);
           // l'API nous retourne les infos de l'utilisateur
           // console.log(response.data);
           const connectedUserInfos = response.data;
@@ -105,6 +108,7 @@ export default (store) => (next) => (action) => {
           store.dispatch(setMyProfileLoading(true));
           // console.log('la requête seffectue');
         }).catch((error) => {
+          store.dispatch(setMyProfileLoading(false));
           // eslint-disable-next-line no-console
           const errorStatus = error.response.status;
           // console.log(error.response.status);

@@ -28,15 +28,23 @@ const ProfileLocalisation = ({ name, longitude, latitude, country, isMyProfile, 
 
 ProfileLocalisation.propTypes = {
   name: PropTypes.string,
-  latitude: PropTypes.number,
-  longitude: PropTypes.number,
-  country: PropTypes.objectOf(
-    PropTypes.shape(
-      {
-        id: PropTypes.number.isRequired,
-        frenchName: PropTypes.string.isRequired,
-      },
-    ),
+  latitude: PropTypes.oneOfType(
+    [
+      PropTypes.string,
+      PropTypes.number,
+    ],
+  ),
+  longitude: PropTypes.oneOfType(
+    [
+      PropTypes.string,
+      PropTypes.number,
+    ],
+  ),
+  country: PropTypes.shape(
+    {
+      id: PropTypes.number,
+      frenchName: PropTypes.string,
+    },
   ),
   isMyProfile: PropTypes.bool.isRequired,
   username: PropTypes.string.isRequired,
@@ -46,7 +54,7 @@ ProfileLocalisation.defaultProps = {
   name: '',
   longitude: '',
   latitude: '',
-  country: '',
+  country: {},
 };
 
 export default ProfileLocalisation;

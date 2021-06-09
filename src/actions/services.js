@@ -42,3 +42,12 @@ export const addSelectedService = (selectedService) => ({
   type: ADD_SELECTED_SERVICE,
   selectedService,
 });
+
+// action type REMOVE_SERVICE
+export const REMOVE_SERVICE = 'REMOVE_SERVICE';
+
+// action creator removeService
+export const removeService = (newServicesList) => ({
+  type: REMOVE_SERVICE,
+  newServicesList,
+});

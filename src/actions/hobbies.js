@@ -42,3 +42,12 @@ export const addSelectedHobby = (selectedHobby) => ({
   type: ADD_SELECTED_HOBBY,
   selectedHobby,
 });
+
+// action type REMOVE_HOBBY
+export const REMOVE_HOBBY = 'REMOVE_HOBBY';
+
+// action creator removeHobby
+export const removeHobby = (newHobbiesList) => ({
+  type: REMOVE_HOBBY,
+  newHobbiesList,
+});

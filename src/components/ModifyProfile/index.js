@@ -9,6 +9,8 @@ import ModifyMyHobbies from 'src/containers/ModifyMyHobbies';
 import ProfilePrincipalInfos from 'src/components/ProfilePrincipalInfos';
 import ModifyHelperSection from 'src/containers/ModifyHelperSection';
 import ProfileButton from 'src/components/ProfileButton';
+import Loader from 'src/components/Loader';
+
 
 // == Import style
 import './modifyProfile.scss';
@@ -27,6 +29,7 @@ const ModifyProfile = ({
   toggleModifyCityModal,
   redirection,
   isConnected,
+  isMyProfileLoaded,
 }) => {
   const userId = connectedUserData.id;
 
@@ -108,191 +111,188 @@ const ModifyProfile = ({
 
   return (
     <>
-      {!isConnected && <Redirect to="/" />}
+      {isConnected === false && <Redirect to="/" />}
       {redirection && <Redirect to="/mon-profil" />}
-
-      <div className="modifyProfile">
-        <h1 className="modifyProfile__title"> Modifier mon profil </h1>
-        <div className="modifyProfile__content">
-          <div className="modifyProfile__principalInfos">
-            <ProfilePrincipalInfos {...connectedUserData} name={name} isMyProfile />
-          </div>
-          <form className="modifyProfile__form" onSubmit={handleSubmit}>
-
-            <div className="modifyProfile__form__section">
-              <h2 className="modifyProfile__form__section__title"> Informations personnelles</h2>
-              <div className="modifyProfile__form__subsection">
-                <h3 className="modifyProfile__form__subsection__title"> Les informations de votre compte </h3>
-                <div className="modifyProfile__form__section__content">
-
-                  <div className="modifyProfile__form__section__fieldGroup">
-                    <div className="modifyProfile__form__label">
-                      {firstnameErrorMessage && (
-                        <div className="modifyProfile__form__errorMessage"> {firstnameErrorMessage} </div>
-                      )}
-                      <div className="modifyProfile__form__label__name"> Prénom </div>
-                      <Field
-                        className="modifyProfile__form__field"
-                        name="firstname"
-                        placeholder="Ex: Martin"
-                        onChange={changeField}
-                        value={connectedUserData.firstname}
-                      />
-                    </div>
-                    <div className="modifyProfile__form__label" htmlFor="lastname">
-                      {lastnameErrorMessage && (
-                        <div className="modifyProfile__form__errorMessage"> {lastnameErrorMessage} </div>
-                      )}
-                      <div className="modifyProfile__form__label__name">Nom </div>
-                      <Field
-                        className="modifyProfile__form__field"
-                        name="lastname"
-                        placeholder="Ex: Dupont"
-                        onChange={changeField}
-                        value={connectedUserData.lastname}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="modifyProfile__form__label" htmlFor="nickname">
-                    <div className="modifyProfile__form__label__name"> Nom d'utilisateur </div>
-                    <Field
-                      className="modifyProfile__form__field"
-                      name="nickname"
-                      placeholder="Ex: Martin88"
-                      onChange={changeField}
-                      value={connectedUserData.nickname}
-                    />
-                  </div>
-                  <div className="modifyProfile__form__label" htmlFor="email">
-                    {emailErrorMessage && (
-                      <div className="modifyProfile__form__errorMessage"> {emailErrorMessage} </div>
-                    )}
-                    <div className="modifyProfile__form__label__name"> Email </div>
-                    <Field
-                      className="modifyProfile__form__field"
-                      name="email"
-                      placeholder="Email@exemple.com"
-                      onChange={changeField}
-                      value={connectedUserData.email}
-                      type="email"
-                    />
-                  </div>
-                  <div className="modifyProfile__form__section__fieldGroup">
-                    {passwordErrorMessage && (
-                      <div className="modifyProfile__form__errorMessage"> {passwordErrorMessage} </div>
-                    )}
-                    <div className="modifyProfile__form__label" htmlFor="password">
-                      <div className="modifyProfile__form__label__name"> Mot de passe </div>
-                      <Field
-                        className="modifyProfile__form__field"
-                        name="newPassword"
-                        placeholder="Nouveau mot de passe"
-                        onChange={changePasswordField}
-                        value={newPassword}
-                        type="password"
-                      />
-                    </div>
-                    <div className="modifyProfile__form__label" htmlFor="password">
-                      <div className="modifyProfile__form__label__name"> Confirmer le mot de passe </div>
-                      <Field
-                        className="modifyProfile__form__field"
-                        name="confirmedNewPassword"
-                        placeholder="Confirmez votre mot de passe"
-                        onChange={changePasswordField}
-                        value={confirmedNewPassword}
-                        type="password"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="modifyProfile__form__label" htmlFor="phoneNumber">
-                    <div className="modifyProfile__form__label__name">Numéro de téléphone </div>
-                    <Field
-                      className="modifyProfile__form__field"
-                      name="phoneNumber"
-                      placeholder="Ex: 06 34 34 34 34"
-                      onChange={changeField}
-                      value={connectedUserData.phoneNumber}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="modifyProfile__form__subsection">
-                <h3 className="modifyProfile__form__subsection__title"> Votre ville de résidence </h3>
-                <div className="modifyProfile__form__label">
-                  <div className="modifyProfile__form__city">
-                    {connectedUserData.cities === null && completeNewAddress.length === 0 ? 'Vous n\'avez pas renseigné votre ville de résidence' : ''}
-                    {connectedUserData.cities !== null && completeNewAddress.length === 0 ? `Votre ville de résidence est ${connectedUserData.cities.name}, ${connectedUserData.cities.country.frenchName}.` : ''}
-                    {completeNewAddress.length !== 0 ? `Votre ville de résidence est ${completeNewAddress[0]}, ${completeNewAddress[1]}.` : ''}
-                  </div>
-                  <button className="modifyProfile__form__city__button" type="button" onClick={openModifyCityModal}> Changer de ville </button>
-                  <ModifyCity />
-                </div>
-              </div>
-
+      {isMyProfileLoaded === 'checking' && <Loader /> }
+      {isMyProfileLoaded === true && (
+        <div className="modifyProfile">
+          <h1 className="modifyProfile__title"> Modifier mon profil </h1>
+          <div className="modifyProfile__content">
+            <div className="modifyProfile__principalInfos">
+              <ProfilePrincipalInfos {...connectedUserData} name={name} isMyProfile />
             </div>
+            <form className="modifyProfile__form" onSubmit={handleSubmit}>
 
-            <div className="modifyProfile__form__section">
-              <h2 className="modifyProfile__form__section__title"> A propos de vous </h2>
-              <div className="modifyProfile__form__section__content">
+              <div className="modifyProfile__form__section">
+                <h2 className="modifyProfile__form__section__title"> Informations personnelles</h2>
+                <div className="modifyProfile__form__subsection">
+                  <h3 className="modifyProfile__form__subsection__title"> Les informations de votre compte </h3>
+                  <div className="modifyProfile__form__section__content">
+
+                    <div className="modifyProfile__form__section__fieldGroup">
+                      <div className="modifyProfile__form__label">
+                        {firstnameErrorMessage && (
+                          <div className="modifyProfile__form__errorMessage"> {firstnameErrorMessage} </div>
+                        )}
+                        <div className="modifyProfile__form__label__name"> Prénom </div>
+                        <Field
+                          className="modifyProfile__form__field"
+                          name="firstname"
+                          placeholder="Ex: Martin"
+                          onChange={changeField}
+                          value={connectedUserData.firstname}
+                        />
+                      </div>
+                      <div className="modifyProfile__form__label" htmlFor="lastname">
+                        {lastnameErrorMessage && (
+                          <div className="modifyProfile__form__errorMessage"> {lastnameErrorMessage} </div>
+                        )}
+                        <div className="modifyProfile__form__label__name">Nom </div>
+                        <Field
+                          className="modifyProfile__form__field"
+                          name="lastname"
+                          placeholder="Ex: Dupont"
+                          onChange={changeField}
+                          value={connectedUserData.lastname}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="modifyProfile__form__label" htmlFor="nickname">
+                      <div className="modifyProfile__form__label__name"> Nom d'utilisateur </div>
+                      <Field
+                        className="modifyProfile__form__field"
+                        name="nickname"
+                        placeholder="Ex: Martin88"
+                        onChange={changeField}
+                        value={connectedUserData.nickname !== null ? connectedUserData.nickname : ''}
+                      />
+                    </div>
+                    <div className="modifyProfile__form__label" htmlFor="email">
+                      {emailErrorMessage && (
+                        <div className="modifyProfile__form__errorMessage"> {emailErrorMessage} </div>
+                      )}
+                      <div className="modifyProfile__form__label__name"> Email </div>
+                      <Field
+                        className="modifyProfile__form__field"
+                        name="email"
+                        placeholder="Email@exemple.com"
+                        onChange={changeField}
+                        value={connectedUserData.email}
+                        type="email"
+                      />
+                    </div>
+                    <div className="modifyProfile__form__section__fieldGroup">
+                      {passwordErrorMessage && (
+                        <div className="modifyProfile__form__errorMessage"> {passwordErrorMessage} </div>
+                      )}
+                      <div className="modifyProfile__form__label" htmlFor="password">
+                        <div className="modifyProfile__form__label__name"> Mot de passe </div>
+                        <Field
+                          className="modifyProfile__form__field"
+                          name="newPassword"
+                          placeholder="Nouveau mot de passe"
+                          onChange={changePasswordField}
+                          value={newPassword}
+                          type="password"
+                        />
+                      </div>
+                      <div className="modifyProfile__form__label" htmlFor="password">
+                        <div className="modifyProfile__form__label__name"> Confirmer le mot de passe </div>
+                        <Field
+                          className="modifyProfile__form__field"
+                          name="confirmedNewPassword"
+                          placeholder="Confirmez votre mot de passe"
+                          onChange={changePasswordField}
+                          value={confirmedNewPassword}
+                          type="password"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="modifyProfile__form__label" htmlFor="phoneNumber">
+                      <div className="modifyProfile__form__label__name">Numéro de téléphone </div>
+                      <Field
+                        className="modifyProfile__form__field"
+                        name="phoneNumber"
+                        placeholder="Ex: 06 34 34 34 34"
+                        onChange={changeField}
+                        value={connectedUserData.phoneNumber !== null ? connectedUserData.phoneNumber : ''}
+                      />
+                    </div>
+                  </div>
+                </div>
 
                 <div className="modifyProfile__form__subsection">
-                  <h3 className="modifyProfile__form__subsection__title"> Présentation </h3>
-                  <div className="modifyProfile__form__label" htmlFor="biography">
-                    <TextArea
-                      className="modifyProfile__form__textarea"
-                      name="biography"
-                      placeholder="Ecrivez-ici un petit texte de présentation, pour que nos utilisateurs apprennent à vous connaitre"
-                      onChange={changeField}
-                      value={connectedUserData.biography}
-                    />
+                  <h3 className="modifyProfile__form__subsection__title"> Votre ville de résidence </h3>
+                  <div className="modifyProfile__form__label">
+                    <div className="modifyProfile__form__city">
+                      {/* {connectedUserData.cities === null && completeNewAddress.length === 0 ? 'Vous n\'avez pas renseigné votre ville de résidence' : ''}
+                      {connectedUserData.cities !== null && completeNewAddress.length === 0 ? `Votre ville de résidence est ${connectedUserData.cities.name}, ${connectedUserData.cities.country.frenchName}.` : ''}
+                      {completeNewAddress.length !== 0 ? `Votre ville de résidence est ${completeNewAddress[0]}, ${completeNewAddress[1]}.` : ''} */}
+                    </div>
+                    <button className="modifyProfile__form__city__button" type="button" onClick={openModifyCityModal}> Changer de ville </button>
+                    <ModifyCity />
                   </div>
                 </div>
-                {isLoaded && <ModifyMyHobbies />}
+
               </div>
-            </div>
-            <div id="helperSection">
-              <ModifyHelperSection />
-            </div>
-            <div className="modifyProfile__buttons">
-              <ProfileButton type="link" textContent="Annuler" color="gray" linkTo="/mon-profil" />
-              <ProfileButton type="hashlink" textContent="Enregistrer mes modifications" color="blue" onClick={handleSubmit} />
-            </div>
-          </form>
+
+              <div className="modifyProfile__form__section">
+                <h2 className="modifyProfile__form__section__title"> À propos de vous </h2>
+                <div className="modifyProfile__form__section__content">
+
+                  <div className="modifyProfile__form__subsection">
+                    <h3 className="modifyProfile__form__subsection__title"> Présentation </h3>
+                    <div className="modifyProfile__form__label" htmlFor="biography">
+                      <TextArea
+                        className="modifyProfile__form__textarea"
+                        name="biography"
+                        placeholder="Ecrivez-ici un petit texte de présentation, pour que nos utilisateurs apprennent à vous connaitre"
+                        onChange={changeField}
+                        value={connectedUserData.biography !== null ? connectedUserData.biography : ''}
+                      />
+                    </div>
+                  </div>
+                  {isLoaded && <ModifyMyHobbies />}
+                </div>
+              </div>
+              <div id="helperSection">
+                <ModifyHelperSection />
+              </div>
+              <div className="modifyProfile__buttons">
+                <ProfileButton type="link" textContent="Annuler" color="gray" linkTo="/mon-profil" />
+                <ProfileButton type="hashlink" textContent="Enregistrer mes modifications" color="blue" onClick={handleSubmit} />
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
 
 ModifyProfile.propTypes = {
-  connectedUserData: PropTypes.objectOf(
-    PropTypes.shape(
-      {
-        firstname: PropTypes.string.isRequired,
-        lastname: PropTypes.string.isRequired,
-        helper: PropTypes.bool.isRequired,
-        nickname: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-        biography: PropTypes.string.isRequired,
-        cities: PropTypes.objectOf(
-          PropTypes.shape(
+  connectedUserData: PropTypes.shape(
+    {
+      firstname: PropTypes.string,
+      lastname: PropTypes.string,
+      helper: PropTypes.bool,
+      nickname: PropTypes.string,
+      email: PropTypes.string,
+      biography: PropTypes.string,
+      phoneNumber: PropTypes.string,
+      cities: PropTypes.shape(
+        {
+          name: PropTypes.string,
+          country: PropTypes.shape(
             {
-              name: PropTypes.string,
-              country: PropTypes.objectOf(
-                PropTypes.shape(
-                  {
-                    frenchName: PropTypes.string,
-                  },
-                ),
-              ),
+              frenchName: PropTypes.string,
             },
           ),
-        ).isRequired,
-      },
-    ).isRequired,
+        },
+      ),
+    },
   ).isRequired,
   changeField: PropTypes.func.isRequired,
   newPassword: PropTypes.string.isRequired,
@@ -305,7 +305,7 @@ ModifyProfile.propTypes = {
   loadServicesList: PropTypes.func.isRequired,
   toggleModifyCityModal: PropTypes.func.isRequired,
   redirection: PropTypes.bool.isRequired,
-  isConnected: PropTypes.bool.isRequired,
+  isConnected: PropTypes.oneOf(['checking', true, false]).isRequired,
 };
 
 export default ModifyProfile;

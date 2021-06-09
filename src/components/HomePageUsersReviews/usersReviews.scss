@@ -3,18 +3,19 @@
 .usersReviews{
   background-color: vars.$light-grey;
   margin-top: 5rem;
-  padding: 2em;
-  //margin-bottom: 5em;
-  // padding: 2rem;
-  //border:1px solid blue;
-  
+  padding: 1rem;
+  font-size:1rem;
+  justify-content: space-between;
+
+  @media (min-width: vars.$breakpoint-tablet) {
+    font-size:1.2rem;
+  }
 
   &__title{
-    padding: 2rem;
-    font-size: 2.5rem;
+    padding: 1.5em;
+    font-size: 1.8em;
     color: vars.$dark-blue;
     font-family: vars.$font-title;
-    
   }
 
   &__list{
@@ -24,9 +25,11 @@
     justify-content:center ;
     flex-wrap: wrap;
     width: 60%;
+    padding-bottom:1.5rem;
     
-    @media (min-width: vars.$breakpoint-tablet) {
+    @media (min-width: vars.$breakpoint-phone) {
       flex-direction:row;
+      width: 95%;
     }
 
     @media (min-width: vars.$max-width) {

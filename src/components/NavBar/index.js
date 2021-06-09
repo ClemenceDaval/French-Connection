@@ -15,13 +15,13 @@ const NavBar = ({ isConnected, toggleLogIn }) => {
   return (
     <div className="navBar">
       <ul className="navBar__list">
-        <li className={isConnected ? 'navBar__item__hidden' : 'navBar__item'} onClick={openLogIn}>
+        <li className={isConnected === true ? 'navBar__item__hidden' : 'navBar__item'} onClick={openLogIn}>
           <button type="button" className="navBar__item__button">
             <img className="navBar__item__image" src={profile} alt="Logo profil" />
             <div className="navBar__item__title"> Se connecter </div>
           </button>
         </li>
-        <li className={isConnected ? 'navBar__item' : 'navBar__item__hidden'}>
+        <li className={isConnected === true ? 'navBar__item' : 'navBar__item__hidden'}>
           <NavLink to="/mon-profil">
             <img className="navBar__item__image" src={profile} alt="Logo profil" />
             <div className="navBar__item__title"> Mon profil </div>
@@ -45,7 +45,7 @@ const NavBar = ({ isConnected, toggleLogIn }) => {
 };
 
 NavBar.propTypes = {
-  isConnected: PropTypes.bool.isRequired,
+  isConnected: PropTypes.oneOf(['checking', true, false]).isRequired,
   toggleLogIn: PropTypes.func.isRequired,
 };
 
