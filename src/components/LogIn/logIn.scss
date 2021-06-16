@@ -1,12 +1,18 @@
 @use 'src/styles/vars';
 
+.modalBlur{
+  opacity: 0.5 ;
+  position: fixed;
+  width:100% ;
+  height:100vh;
+  background-color: white;
+}
+
 .logIn{
 
   &__close{
     display:none;
   }
-
-  
 
   &__modal{
     background-color:vars.$light-color;

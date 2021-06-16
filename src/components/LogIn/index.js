@@ -21,32 +21,35 @@ const LogIn = ({ logIn, toggleLogIn, toggleSignIn, email, password, changeField,
   };
 
   return (
-    <div className={logIn ? 'logIn' : 'logIn__close'}>
-      <div className="logIn__modal">
-        <h1 className="logIn__modal__title"> Bienvenue sur French Connection </h1>
-        <button className="logIn__modal__closeButton" type="button" onClick={closeLogIn}> X </button>
-        <form className="logIn__modal__form" onSubmit={handleSubmit}>
-          <Field
-            className="logIn__modal__form__field"
-            name="email"
-            placeholder="Adresse Email"
-            onChange={changeField}
-            value={email}
-          />
-          <Field
-            className="logIn__modal__form__field"
-            type="password"
-            name="password"
-            placeholder="Mot de passe"
-            onChange={changeField}
-            value={password}
-          />
-          <button className="logIn__modal__form__button" type="submit"> Se connecter </button>
-        </form>
+    <>
+      <div className={logIn ? 'modalBlur' : 'logIn__close'}> </div>
+      <div className={logIn ? 'logIn' : 'logIn__close'}>
+        <div className="logIn__modal">
+          <h1 className="logIn__modal__title"> Bienvenue sur French Connection </h1>
+          <button className="logIn__modal__closeButton" type="button" onClick={closeLogIn}> X </button>
+          <form className="logIn__modal__form" onSubmit={handleSubmit}>
+            <Field
+              className="logIn__modal__form__field"
+              name="email"
+              placeholder="Adresse Email"
+              onChange={changeField}
+              value={email}
+            />
+            <Field
+              className="logIn__modal__form__field"
+              type="password"
+              name="password"
+              placeholder="Mot de passe"
+              onChange={changeField}
+              value={password}
+            />
+            <button className="logIn__modal__form__button" type="submit"> Se connecter </button>
+          </form>
 
-        <button type="button" className="logIn__modal__openSignInButton" onClick={openSignIn}> Vous n'avez pas encore de compte ?</button>
+          <button type="button" className="logIn__modal__openSignInButton" onClick={openSignIn}> Vous n'avez pas encore de compte ?</button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
