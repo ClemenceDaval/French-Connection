@@ -1,5 +1,15 @@
 @use 'src/styles/vars';
 
+.modalBlur{
+  opacity: 0.5 ;
+  position: fixed;
+  width:100% ;
+  height:110vh;
+  background-color: white;
+  z-index:50;
+  margin-top:-10rem;
+}
+
 .signIn{
 
   &__close{
@@ -9,7 +19,7 @@
   &__modal{
     background-color:vars.$light-color;
     width:80%;
-    top:25%;
+    top:15%;
     left:10%;
     padding-bottom:2rem;
     border-radius:2rem;
@@ -20,6 +30,11 @@
     @media (min-width: vars.$breakpoint-tablet){
       width: 50%;
       left:25%;
+    }
+
+    @media (min-width: vars.$breakpoint-desktop){
+      width: 30%;
+      left:35%;
     }
 
     &__closeButton {

@@ -60,58 +60,61 @@ const SignIn = ({
   };
 
   return (
-    <div className={signIn ? 'signIn' : 'signIn__close'}>
-      <div className="signIn__modal">
-        <h1 className="signIn__modal__title"> Créez votre compte </h1>
-        <button className="signIn__modal__closeButton" type="button" onClick={closeSignIn}> X </button>
-        <form className="signIn__modal__form" onSubmit={handleSubmit}>
-          {errorMessage && (
-            <p className="signIn__modal__form__error"> {errorMessage} </p>
-          )}
-          <Field
-            className="signIn__modal__form__field"
-            name="firstname"
-            placeholder="Prénom"
-            onChange={changeField}
-            value={firstname}
-          />
-          <Field
-            className="signIn__modal__form__field"
-            name="lastname"
-            placeholder="Nom"
-            onChange={changeField}
-            value={lastname}
-          />
-          <Field
-            className="signIn__modal__form__field"
-            name="email"
-            placeholder="Email"
-            onChange={changeField}
-            value={email}
-          />
-          <Field
-            className="signIn__modal__form__field"
-            name="password"
-            type="password"
-            placeholder="Mot de passe"
-            onChange={changeField}
-            value={password}
-          />
-          <Field
-            className="signIn__modal__form__field"
-            name="confirmedPassword"
-            type="password"
-            placeholder="Confirmer votre mot de passe"
-            onChange={changeField}
-            value={confirmedPassword}
-          />
+    <>
+      <div className={signIn ? 'modalBlur' : 'logIn__close'}> </div>
+      <div className={signIn ? 'signIn' : 'signIn__close'}>
+        <div className="signIn__modal">
+          <h1 className="signIn__modal__title"> Créez votre compte </h1>
+          <button className="signIn__modal__closeButton" type="button" onClick={closeSignIn}> X </button>
+          <form className="signIn__modal__form" onSubmit={handleSubmit}>
+            {errorMessage && (
+              <p className="signIn__modal__form__error"> {errorMessage} </p>
+            )}
+            <Field
+              className="signIn__modal__form__field"
+              name="firstname"
+              placeholder="Prénom"
+              onChange={changeField}
+              value={firstname}
+            />
+            <Field
+              className="signIn__modal__form__field"
+              name="lastname"
+              placeholder="Nom"
+              onChange={changeField}
+              value={lastname}
+            />
+            <Field
+              className="signIn__modal__form__field"
+              name="email"
+              placeholder="Email"
+              onChange={changeField}
+              value={email}
+            />
+            <Field
+              className="signIn__modal__form__field"
+              name="password"
+              type="password"
+              placeholder="Mot de passe"
+              onChange={changeField}
+              value={password}
+            />
+            <Field
+              className="signIn__modal__form__field"
+              name="confirmedPassword"
+              type="password"
+              placeholder="Confirmer votre mot de passe"
+              onChange={changeField}
+              value={confirmedPassword}
+            />
 
-          <button className="signIn__modal__form__button" type="submit"> S'inscrire </button>
-        </form>
+            <button className="signIn__modal__form__button" type="submit"> S'inscrire </button>
+          </form>
 
-        <button type="button" className="signIn__modal__openLogInButton" onClick={openLogIn}> Vous avez déjà un compte ?</button>
+          <button type="button" className="signIn__modal__openLogInButton" onClick={openLogIn}> Vous avez déjà un compte ?</button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
