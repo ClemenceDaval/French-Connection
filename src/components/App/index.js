@@ -12,14 +12,8 @@ import jwt_decode from 'jwt-decode';
 // == Import Locaux
 import Footer from 'src/components/Footer';
 import Header from 'src/components/Header';
-import HomePageHeader from 'src/components/HomePageHeader';
-import HomePageFonctionnalities from 'src/components/HomePageFonctionnalities';
-import HomePageMap from 'src/components/HomePageMap';
-
-import HomePageUsersReviews from 'src/containers/HomePageUsersReviews';
-
+import HomePage from 'src/components/HomePage';
 import Results from 'src/components/Results';
-
 import Page404 from 'src/components/Page404';
 import Page403 from 'src/components/Page403';
 import Profile from 'src/containers/Profile';
@@ -88,10 +82,7 @@ const App = ({
       <SignIn />
       <Switch>
         <Route path="/" exact>
-          <HomePageHeader />
-          <HomePageFonctionnalities />
-          <HomePageMap />
-          <HomePageUsersReviews />
+          <HomePage />
         </Route>
         <Route path="/resultats" exact>
           <Results />
