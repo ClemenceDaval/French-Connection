@@ -21,11 +21,26 @@ const MyProfile = ({
   redirect,
   isConnected,
   isMyProfileLoaded,
+  loadConnectedUserData,
+  connectedUserId,
 }) => {
   useEffect(() => {
-    console.log('useEffect');
+    console.log('useEffect1');
     redirect(false);
+    console.log(connectedUserId);
+
+    if (connectedUserId !== '') {
+      loadConnectedUserData(connectedUserId);
+      console.log('connectedUserId n\'est pas nul');
+    }
   }, []);
+
+  useEffect(() => {
+    console.log('isConnected change');
+    if (connectedUserId !== '') {
+      loadConnectedUserData(connectedUserId);
+    }
+  }, [isConnected]);
 
   let name = '';
   if (connectedUserData.nickname != null) {

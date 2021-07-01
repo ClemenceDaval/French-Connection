@@ -12,7 +12,7 @@ import {
   saveUsersReviews,
 } from 'src/actions/user';
 
-import { LOG_IN, LOAD_CONNECTED_USER_DATA, loadConnectedUserData, saveConnectedUserData, LOG_OUT, closeSignIn, saveTokenInState, setIsConnected, resetPassword } from 'src/actions/log';
+import { LOG_IN, LOAD_CONNECTED_USER_DATA, saveConnectedUserId, saveConnectedUserData, LOG_OUT, closeSignIn, saveTokenInState, setIsConnected, resetPassword } from 'src/actions/log';
 import {
   LOAD_USERS_BY_COUNTRY, saveUsersList, saveUsersCities, loadingCities, saveUsersCity,
 } from 'src/actions/map';
@@ -72,15 +72,19 @@ export default (store) => (next) => (action) => {
           // on décode le token pour aller chercher son id
           const decodedToken = jwt_decode(userToken);
 
-          // on va chercher les données de l'utilisateur connecté
-          store.dispatch(loadConnectedUserData(decodedToken.id));
-          // on ferme le modal de logIn
+          // on sauvegarde l'id de l'utilisateur
+          store.dispatch(saveConnectedUserId(decodedToken.id));
+
+          // on ferme le modal de logIn et on passe en connecté
+          store.dispatch(setIsConnected(true));
           store.dispatch(toggleLogIn(false));
+
           // on informe l'utilisateur qu'il est connecté
           toast.info('Vous êtes maintenant connectés');
         }).catch((error) => {
+          console.log(error);
           console.log('Vous n\'avez pas pu être identifié');
-          
+          toast.info('Vous n\'avez pas pu être identifié');
         });
       next(action);
       break;
@@ -89,6 +93,7 @@ export default (store) => (next) => (action) => {
     case LOAD_CONNECTED_USER_DATA: {
       const { id } = action;
       const userToken = localStorage.getItem('token');
+      store.dispatch(setMyProfileLoading(false));
 
       api
         .get(`/user/${id}`, {
@@ -98,27 +103,25 @@ export default (store) => (next) => (action) => {
         })
         .then((response) => {
           console.log(userToken);
-          // l'API nous retourne les infos de l'utilisateur
-          // console.log(response.data);
           const connectedUserInfos = response.data;
-          // console.log(response.headers);
+          console.log(connectedUserInfos);
           // on sauvegarde ces infos
           store.dispatch(saveConnectedUserData(connectedUserInfos));
           // gestion du loader dans la page profil
+          console.log('on load les infos de l\'utilisateur');
           store.dispatch(setMyProfileLoading(true));
-          // console.log('la requête seffectue');
         }).catch((error) => {
-          store.dispatch(setMyProfileLoading(false));
+          store.dispatch(setMyProfileLoading(true));
           // eslint-disable-next-line no-console
           const errorStatus = error.response.status;
           // console.log(error.response.status);
           console.log('vous ne passerez pas');
-          if (errorStatus === 401) {
-            window.location.href = '/403';
-          }
-          if (errorStatus === 404) {
-            window.location.href = '/404';
-          }
+          // if (errorStatus === 401) {
+          //   window.location.href = '/403';
+          // }
+          // if (errorStatus === 404) {
+          //   window.location.href = '/404';
+          // }
         });
       // puis on décide si on la laisse filer ou si on la bloque
       next(action);
@@ -185,8 +188,6 @@ export default (store) => (next) => (action) => {
           },
         )
         .then((response) => {
-          console.log(response);
-          console.log('Vous êtes inscrits');
           store.dispatch(toggleSignIn(false));
           toast.info('Inscription réussie. Veuillez vous connecter');
           store.dispatch(resetSignInFields());
@@ -295,17 +296,18 @@ export default (store) => (next) => (action) => {
           store.dispatch(resetPassword());
           store.dispatch(redirectToMyProfile(true));
           store.dispatch(saveModifiedConnectedUserData(response.data));
+          toast.info('Vos modifications ont été enregistrées');
           // window.location.href = '/mon-profil';
           // const usersList = response.data;
           // store.dispatch(saveUsersCards(usersList));
         }).catch((error) => {
           // eslint-disable-next-line no-console
+          store.dispatch(redirectToMyProfile(true));
+          toast.info('Un problème est survenu. Vos modifications n\'ont pas été enregistrées');
+
           const errorStatus = error.response.status;
           console.log(errorStatus);
           console.log('vous ne passerez pas');
-          // if (errorStatus === 401) {
-          //   window.location.href = '/403';
-          // }
         });
       next(action);
       break;

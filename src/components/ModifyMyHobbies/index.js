@@ -21,8 +21,6 @@ const ModifyMyHobbies = ({
     const splitValue = value.split('-');
     const hobbyId = parseInt(splitValue[0], 10);
     const hobbyName = splitValue[1];
-    console.log(hobbyName);
-    console.log(hobbyId);
     saveSelectedHobby(hobbyId, hobbyName);
   };
 
@@ -33,17 +31,9 @@ const ModifyMyHobbies = ({
 
   const clickToRemoveHobby = (evt) => {
     const hobbyToRemove = parseInt(evt.target.value, 10);
-    console.log('id de hobby a remove');
-    console.log(hobbyToRemove);
-    console.log('myHobbies');
-    console.log(myHobbies);
     const myNewHobbiesList = myHobbies.filter((hobby) => {
-      console.log('hobby.id');
-      console.log(hobby.id);
       return (hobby.id !== hobbyToRemove);
     });
-    console.log('nouvelle liste des hobbies');
-    console.log(myNewHobbiesList);
     removeHobby(myNewHobbiesList);
   };
 
@@ -71,7 +61,6 @@ const ModifyMyHobbies = ({
             myHobbies.map((myHobby) => {
               if (myHobby.id === hobby.id) {
                 correspondance += 1;
-                console.log('il y a une correspondance !');
               }
             });
             if (correspondance === 0) {

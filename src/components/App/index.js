@@ -42,7 +42,7 @@ import './styles.css';
 // == Composant
 
 const App = ({
-  loadConnectedUserData, setIsConnected,
+  loadConnectedUserData, setIsConnected, saveConnectedUserId,
 }) => {
   // récupération du chemin
   const pathName = useLocation().pathname;
@@ -56,7 +56,8 @@ const App = ({
       const dateNow = Math.round(Date.now() / 1000);
       // console.log(dateNow);
       if (decodedToken.exp - 600 > dateNow) {
-        loadConnectedUserData(decodedToken.id);
+        // loadConnectedUserData(decodedToken.id);
+        saveConnectedUserId(decodedToken.id);
         console.log('je suis déjà connecté');
         setIsConnected(true);
       }

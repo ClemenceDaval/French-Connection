@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Loader from 'src/components/Loader';
+import reset from 'src/assets/images/recycle.png';
 
 import UserCard from 'src/containers/UserCard';
 import './users.scss';
@@ -19,19 +20,23 @@ const Users = ({
 }) => {
   useEffect(() => {
     loadUsersCards();
+    setErrorMessage('');
   }, []);
+
+  const [errorMessage, setErrorMessage] = useState('');
 
   const filterUsers = (inputValue, filterByStatus) => {
     let searchResult = [];
+    // helper only
     if (filterByStatus && inputValue === '') {
-      console.log('helper only');
       searchResult = usersList.filter((user) => (
         user.helper === true
       ));
+      searchResult.length === 0 ? setErrorMessage('Aucun utilisateur trouvé') : setErrorMessage('');
       renderNewUsersList(searchResult);
     }
+    // helper only & filter by name
     if (filterByStatus && inputValue !== '') {
-      console.log('helper only & tri par nom');
       searchResult = usersList.filter((user) => {
         if (user.nickname === null) {
           return (
@@ -43,10 +48,11 @@ const Users = ({
         return (user.nickname.toLowerCase().startsWith(inputValue.toLowerCase())
           && user.helper === true);
       });
+      searchResult.length === 0 ? setErrorMessage('Aucun utilisateur trouvé') : setErrorMessage('');
       renderNewUsersList(searchResult);
     }
+    // filter by name
     if (inputValue !== '' && filterByStatus === false) {
-      console.log('tout le monde & tri par nom');
       searchResult = usersList.filter((user) => {
         if (user.nickname === null) {
           return (
@@ -56,20 +62,18 @@ const Users = ({
         }
         return (user.nickname.toLowerCase().startsWith(inputValue.toLowerCase()));
       });
+      searchResult.length === 0 ? setErrorMessage('Aucun utilisateur trouvé') : setErrorMessage('');
       renderNewUsersList(searchResult);
     }
+    // no filter
     if (inputValue === '' && filterByStatus === false) {
-      console.log('pas de tri');
-      console.log(usersList);
       renderNewUsersList(usersList);
     }
-    console.log(searchResult);
   };
 
   const handleChangeInput = (evt) => {
     const inputValue = evt.target.value;
     changeInputValue(inputValue);
-    console.log(inputValue);
     filterUsers(inputValue, helperOnly);
   };
 
@@ -77,6 +81,12 @@ const Users = ({
     toggleHelperOnlyCheckbox(!helperOnly);
     filterUsers(searchValue, !helperOnly);
   };
+
+  const resetFilters = () => {
+    toggleHelperOnlyCheckbox(false);
+    changeInputValue('');
+    setErrorMessage('');
+  }
 
   return (
     <div className="users">
@@ -107,7 +117,7 @@ const Users = ({
               placeholder="Recherchez un utilisateur"
               onChange={handleChangeInput}
             />
-            <input type="submit" className="users__filters__searchBar__submitButton" value="" />
+            <input type="button" className="users__filters__searchBar__submitButton" value="" />
           </form>
           <label htmlFor="byStatusCheckbox" className="users__filters__byStatus__label">
             Afficher uniquement les helpers
@@ -116,12 +126,18 @@ const Users = ({
         </div>
       </div>
       {isLoading && (<Loader />)}
+      {errorMessage !== '' && (
+          <div> 
+            {errorMessage}
+            <button className='resetSearchButton' type="button" onClick={resetFilters}><img src={reset}/></button>          
+          </div>
+      )}
       {!isLoading && (
-      <ul className="users__list">
-        {newUserList.length !== 0
-          ? newUserList.map((userCard) => <UserCard key={userCard.id} {...userCard} />)
-          : usersList.map((userCard) => <UserCard key={userCard.id} {...userCard} />)}
-      </ul>
+        <ul className="users__list">
+          {newUserList.length !== 0 || newUserList.length ===0 && errorMessage !== ''
+            ? newUserList.map((userCard) => <UserCard key={userCard.id} {...userCard} />)
+            : usersList.map((userCard) => <UserCard key={userCard.id} {...userCard} />)}
+        </ul>
       )}
     </div>
   );
