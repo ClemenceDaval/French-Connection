@@ -1,17 +1,17 @@
 /* eslint-disable no-console */
+
 // == Import npm
 import React, { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {
-  Route, Switch, useLocation, useHistory,
-} from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import jwt_decode from 'jwt-decode';
 
 // == Import Locaux
-import Footer from 'src/components/Footer';
 import Header from 'src/components/Header';
+import SignIn from 'src/containers/SignIn';
+import LogIn from 'src/containers/LogIn';
 import HomePage from 'src/components/HomePage';
 import Results from 'src/components/Results';
 import Page404 from 'src/components/Page404';
@@ -23,9 +23,7 @@ import ModifyProfile from 'src/containers/ModifyProfile';
 import LegalsMentions from 'src/components/LegalsMentions';
 import SiteMap from 'src/components/SiteMap';
 import AboutUs from 'src/components/AboutUs';
-
-import SignIn from 'src/containers/SignIn';
-import LogIn from 'src/containers/LogIn';
+import Footer from 'src/components/Footer';
 
 // == Import Data
 import DataTeam from 'src/data/DataTeam';
@@ -34,43 +32,39 @@ import DataTeam from 'src/data/DataTeam';
 import './styles.css';
 
 // == Composant
-
 const App = ({
-  loadConnectedUserData, setIsConnected, saveConnectedUserId,
+  setIsConnected, saveConnectedUserId,
 }) => {
-  // récupération du chemin
+	
+  // URL recuperation
   const pathName = useLocation().pathname;
-  // console.log(pathName);
 
+  // TOKEN verification
   useEffect(() => {
     const userTokenFromLocalStorage = localStorage.getItem('token');
     if (userTokenFromLocalStorage != null) {
       const decodedToken = jwt_decode(userTokenFromLocalStorage);
-      // console.log(decodedToken);
       const dateNow = Math.round(Date.now() / 1000);
-      // console.log(dateNow);
       if (decodedToken.exp - 600 > dateNow) {
-        // loadConnectedUserData(decodedToken.id);
         saveConnectedUserId(decodedToken.id);
         console.log('je suis déjà connecté');
         setIsConnected(true);
       }
       else {
-        // console.log('Token expiré');
         localStorage.removeItem('token');
+        console.log('je ne suis pas connecté');
       }
     }
     else {
-      console.log('je ne suis pas encore connecté');
       setIsConnected(false);
+      console.log('je ne suis pas connecté');
     }
   }, []);
 
-  // -- gestion du scroll
+  // -- scroll management
   useEffect(
     () => {
       window.scrollTo({ top: 0 });
-      // console.log('le pathname a changé');
     },
     [pathName],
   );
@@ -122,8 +116,8 @@ const App = ({
 };
 
 App.propTypes = {
-  loadConnectedUserData: PropTypes.func.isRequired,
   setIsConnected: PropTypes.func.isRequired,
+  saveConnectedUserId: PropTypes.func.isRequired,
 };
 
 // == Export

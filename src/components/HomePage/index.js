@@ -6,7 +6,7 @@ import HomePageMap from 'src/components/HomePageMap';
 import HomePageUsersReviews from 'src/containers/HomePageUsersReviews';
 
 const HomePage = () => (
-  <>
+  <> 
     <HomePageHeader />
     <HomePageFonctionnalities />
     <HomePageMap />
