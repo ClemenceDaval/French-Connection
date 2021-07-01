@@ -29,6 +29,12 @@ const Users = ({
 
   const filterUsers = (inputValue, filterByStatus) => {
     let searchResult = [];
+
+    // no filter
+    if (inputValue === '' && filterByStatus === false) {
+      renderNewUsersList(usersList);
+    }
+
     // helper only
     if (filterByStatus && inputValue === '') {
       searchResult = usersList.filter((user) => (
@@ -37,6 +43,22 @@ const Users = ({
       searchResult.length === 0 ? setErrorMessage('Aucun utilisateur trouvé') : setErrorMessage('');
       renderNewUsersList(searchResult);
     }
+
+    // filter by name
+    if (inputValue !== '' && filterByStatus === false) {
+      searchResult = usersList.filter((user) => {
+        if (user.nickname === null) {
+          return (
+            (user.firstname.toLowerCase().startsWith(inputValue.toLowerCase())
+            || user.lastname.toLowerCase().startsWith(inputValue.toLowerCase()))
+          );
+        }
+        return (user.nickname.toLowerCase().startsWith(inputValue.toLowerCase()));
+      });
+      searchResult.length === 0 ? setErrorMessage('Aucun utilisateur trouvé') : setErrorMessage('');
+      renderNewUsersList(searchResult);
+    }
+
     // helper only & filter by name
     if (filterByStatus && inputValue !== '') {
       searchResult = usersList.filter((user) => {
@@ -53,24 +75,9 @@ const Users = ({
       searchResult.length === 0 ? setErrorMessage('Aucun utilisateur trouvé') : setErrorMessage('');
       renderNewUsersList(searchResult);
     }
-    // filter by name
-    if (inputValue !== '' && filterByStatus === false) {
-      searchResult = usersList.filter((user) => {
-        if (user.nickname === null) {
-          return (
-            (user.firstname.toLowerCase().startsWith(inputValue.toLowerCase())
-            || user.lastname.toLowerCase().startsWith(inputValue.toLowerCase()))
-          );
-        }
-        return (user.nickname.toLowerCase().startsWith(inputValue.toLowerCase()));
-      });
-      searchResult.length === 0 ? setErrorMessage('Aucun utilisateur trouvé') : setErrorMessage('');
-      renderNewUsersList(searchResult);
-    }
-    // no filter
-    if (inputValue === '' && filterByStatus === false) {
-      renderNewUsersList(usersList);
-    }
+
+    
+    
   };
 
   const handleChangeInput = (evt) => {
@@ -95,7 +102,7 @@ const Users = ({
       <UsersHeader />
       <div className="users__filters">
         <div className="users__filters__container">
-          <form className="users__filters__searchBar">
+          <div className="users__filters__searchBar">
             <input
               type="text"
               className="users__filters__searchBar__input"
@@ -105,7 +112,7 @@ const Users = ({
               onChange={handleChangeInput}
             />
             <input type="button" className="users__filters__searchBar__submitButton" value="" />
-          </form>
+          </div>
           <label htmlFor="byStatusCheckbox" className="users__filters__byStatus__label">
             Afficher uniquement les helpers
             <input type="checkbox" className="users__filters__byStatus__checkbox" name="byStatusCheckbox" checked={helperOnly} onChange={handleChangeCheckbox} />

@@ -171,7 +171,7 @@ export default (store) => (next) => (action) => {
       break;
     }
     case ADD_NEW_USER: {
-      // Création d'un nouvel utilisateur (inscription)
+      // Creation of a new user
       const state = store.getState();
       const {
         firstname, lastname, email, password, confirmedPassword,
