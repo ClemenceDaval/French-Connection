@@ -9,12 +9,7 @@ import ProfilePrincipalInfos from 'src/components/ProfilePrincipalInfos';
 import ProfileDescription from 'src/components/ProfileDescription';
 import ProfileHobbies from 'src/components/ProfileHobbies';
 import ProfileServices from 'src/components/ProfileServices';
-
-// import ModifyButton from 'src/components/ModifyButton';
-// import BecomeHelperButton from 'src/components/BecomeHelperButton';
 import ContactMe from 'src/containers/ContactMe';
-// import ProfileButton from 'src/components/ProfileButton';
-
 import Loader from 'src/components/Loader';
 
 // == import style
@@ -29,11 +24,10 @@ const Profile = ({
   const params = useParams();
   const userId = params.id;
   const pathName = useLocation().pathname;
-  console.log(pathName);
   // on charge les infos du user à chaque fois que le pathname est modifié
+  
   useEffect(() => {
     loadUserProfile(userId);
-    console.log('l\'url a changé');
   }, [pathName]);
 
   let name = '';
@@ -83,9 +77,5 @@ Profile.propTypes = {
   ).isRequired,
   loadUserProfile: PropTypes.func.isRequired,
 };
-
-// Profile.defaultProps = {
-//   nickname: '',
-// }
 
 export default Profile;

@@ -40,6 +40,11 @@ const ModifyProfile = ({
     loadServicesList();
   }, []);
 
+  const [firstnameErrorMessage, setFirstnameErrorMessage] = useState('');
+  const [lastnameErrorMessage, setLastnameErrorMessage] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+
   let name = '';
   if (connectedUserData.nickname != null) {
     name = connectedUserData.nickname;
@@ -48,10 +53,7 @@ const ModifyProfile = ({
     name = `${connectedUserData.firstname} ${connectedUserData.lastname}`;
   }
 
-  const [firstnameErrorMessage, setFirstnameErrorMessage] = useState('');
-  const [lastnameErrorMessage, setLastnameErrorMessage] = useState('');
-  const [emailErrorMessage, setEmailErrorMessage] = useState('');
-  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  
 
   // verifications before sending the form
   const handleSubmit = (evt) => {
@@ -99,6 +101,9 @@ const ModifyProfile = ({
     if (nbError === 0) {
       console.log('il ny a pas derreur');
       modifyProfile(userId, myHobbiesList, myServicesList);
+    }
+    if (nbError !== 0) {
+      window.scrollTo(0, 200);
     }
   };
 
