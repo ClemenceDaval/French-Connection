@@ -35,7 +35,7 @@
     }
 
     &__text{
-      font-size:1.4rem;
+      font-size:1.2rem;
       font-family: vars.$font-text; 
       padding: 0 2rem;
       line-height: 1.7rem;
@@ -77,19 +77,18 @@
       margin-bottom: 1.5rem;
       background-color: #F0F0F0;
       box-shadow: 6px 4px 4px rgba(0, 0, 0, 0.25);
-      width:100%;
+      width:230px;
       justify-content:space-between;
       margin: 2rem;
   
   
       @media only screen and (min-width: 601px) {
-        width: 20%;
         flex-direction:column;
       }
 
       &__picture{
         background-color: vars.$dark-blue;
-        width:100%;
+        width:230px;
         height:230px;
         background-size:cover;
         background-repeat: no-repeat;
@@ -128,7 +127,6 @@
       &__card{
         width: 100%;
         text-align: left;
-        padding-left: 1.5em;
 
         &__name{
           font-size: 1.5rem;

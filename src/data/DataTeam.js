@@ -3,7 +3,7 @@ export default [
     id: 1,
     avatar: 'clemence.jpg',
     name: 'Clémence',
-    role: 'Lead-Dev Front',
+    role: 'Scrum Master',
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ export default [
     id: 4,
     avatar: 'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png',
     name: 'Laurent',
-    role: 'Scrum Master',
+    role: 'Lead-Dev Front',
   },
   {
     id: 5,

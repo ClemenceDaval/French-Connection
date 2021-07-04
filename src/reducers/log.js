@@ -46,7 +46,7 @@ const initialState = {
   redirectionToMyProfile: false,
   isMyProfileLoaded: 'checking',
   newAddress: '',
-  completeNewAddress: [],
+  completeNewAddress:[],
   avatarFile: null,
 };
 

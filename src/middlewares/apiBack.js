@@ -54,6 +54,7 @@ import {
   MODIFY_PROFILE,
   redirectToMyProfile,
   saveModifiedConnectedUserData,
+  resetCityField,
 } from 'src/actions/modifyForm';
 
 import {
@@ -325,6 +326,7 @@ export default (store) => (next) => (action) => {
           store.dispatch(resetPassword());
           store.dispatch(redirectToMyProfile(true));
           store.dispatch(saveModifiedConnectedUserData(response.data));
+          store.dispatch(resetCityField());
           toast.info('Vos modifications ont été enregistrées');
           // window.location.href = '/mon-profil';
           // const usersList = response.data;
@@ -332,6 +334,7 @@ export default (store) => (next) => (action) => {
         }).catch((error) => {
           // eslint-disable-next-line no-console
           store.dispatch(redirectToMyProfile(true));
+          store.dispatch(resetCityField());
           toast.info('Un problème est survenu. Vos modifications n\'ont pas été enregistrées');
 
           const errorStatus = error.response.status;

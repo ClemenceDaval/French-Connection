@@ -47,9 +47,19 @@
     }
   }
 
-  &__ref{
+  &__seo{
     text-align:left;
     margin-top:2rem;
+    width:100%;
+    font-family: vars.$font-title;
+    padding-left:1rem;
+    padding-bottom:1rem;
+    font-style: italic;
+  }
+
+  &__ref{
+    text-align:left;
+    margin-top:1rem;
     margin-bottom:3rem;
     width:100%;
     font-family: vars.$font-title;

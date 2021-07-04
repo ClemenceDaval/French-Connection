@@ -22,7 +22,7 @@ const ModifyCity = ({
     const addressComponents = results[0].address_components;
     console.log(addressComponents);
     const city = addressComponents.find(
-      (component) => component.types.includes('locality'),
+      (component) => component.types.includes('locality') || component.types.includes('administrative_area_level_3') || component.types.includes('administrative_area_level_1') ,
     );
     const cityName = city.long_name;
     console.log(cityName);
@@ -66,7 +66,7 @@ const ModifyCity = ({
               <div>
                 <div className="SearchBar__form">
                   <input className="SearchBar__mainInput" {...getInputProps({ placeholder: 'Saisissez votre recherche' })} />
-                  <input type="button" className="SearchBar__submit" value="" onClick={handleClick} />
+                  <button type="button" className="modifyCity__modal__saveButton" onClick={handleClick}> Enregistrer</button>
                 </div>
                 <div>
                   {loading ? <div>...loading</div> : null}
