@@ -129,8 +129,8 @@ const Users = ({
       {!isLoading && (
         <ul className="users__list">
           {newUserList.length !== 0 || newUserList.length ===0 && errorMessage !== ''
-            ? newUserList.map((userCard) => <UserCard key={userCard.id} {...userCard} />)
-            : usersList.map((userCard) => <UserCard key={userCard.id} {...userCard} />)}
+            ? newUserList.map((user) => <UserCard key={user.id} {...user} />)
+            : usersList.map((user) => <UserCard key={user.id} {...user} />)}
         </ul>
       )}
     </div>

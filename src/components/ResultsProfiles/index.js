@@ -10,12 +10,12 @@ const ResultsProfiles = ({ usersList, usersByCity, cityName }) => {
   return (
     <div className="resultsProfiles">
       { usersList && (
-        <div className="resultsProfiles__Header">
-          <h1 className="resultsProfiles__City">{cityName}</h1>
-          <h2 className="resultsProfiles__SearchResult">{nbProfile} profil(s) trouvé(s)</h2>
+        <div className="resultsProfiles__header">
+          <h1 className="resultsProfiles__city">{cityName}</h1>
+          <h2 className="resultsProfiles__searchResult">{nbProfile} profil(s) trouvé(s)</h2>
         </div>
       )}
-      <ul className="resultsProfiles__List">
+      <ul className="resultsProfiles__list">
         {usersByCity ? usersByCity.map((profileData) => <ResultsProfile key={profileData.id} {...profileData} />) : usersList.map((profileData) => <ResultsProfile key={profileData.id} {...profileData} />)}
       </ul>
     </div>
