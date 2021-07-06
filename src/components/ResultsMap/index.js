@@ -53,7 +53,7 @@ const ResultsMap = ({
 
   const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
+    mapRef.current.setZoom(12);
   }, []);
 
   // if (loadError) return 'Erreur';

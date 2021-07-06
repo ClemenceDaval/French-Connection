@@ -1,159 +1,103 @@
 @use 'src/styles/_vars';
 
 .resultsProfile{
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  // padding-bottom: 1.5rem;
   background-color: #f0f0f0;
   box-shadow: 4px 3px 9px rgba(0,0,0,.25);
-  width: 100%;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
+  margin: 1rem 0.2rem;
   justify-content: space-between;
+  border-radius: 20px;
+  align-items:center;
 
-  @media only screen and (min-width: 601px) {
-    width: 100%;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    margin-bottom: 1em;
-  }
-  @media only screen and (min-width: 601px) {
   &__picture{
-    width: unset;
-    
-  
+    width: 100px;
+    height:100px;
+    margin-left:0.2rem;
+
+    @media (min-width: vars.$breakpoint-phone) {
+      width: 120px;
+      height:120px;
+      margin-left:0.4rem;
+    }
+
+    @media (min-width: vars.$breakpoint-tablet) {
+      width: 150px;
+      height:150px;
+      margin-left:0.5rem;
+    }
+
     img{
-    width: 325px;
-    height: 325px;
-   }
+    width:100%;
+    height:100%;
+    border-radius: 50%;
+    object-fit:cover;
+    }
   }
-}
-  
+ 
   &__text{
-    width: 100%;
+    width: calc(100% - 115px);
     text-align: left;
     position: relative;
-    display: grid;
-    place-items: center;
+    font-size:0.9rem;
+    padding-bottom:4rem;
+    padding-right:1rem;
+    
+    @media (min-width: vars.$breakpoint-phone) {
+      width: calc(100% - 140px);
+    }
+    @media (min-width: vars.$breakpoint-tablet) {
+      width: calc(100% - 175px);
+    }
 
-  } 
+    &__role{
+      color: vars.$dark-blue;
+      font-weight: bold;
+      padding-top: 1.1rem;
+      font-size: 1.1em;
+      text-align: right;
+      padding-right: 1.3rem;
+      font-family: vars.$font-title;
+
+      &--hidden{
+        visibility: hidden,
+      }
+    }
+
+    &__name, &__link{
+      font-family: vars.$font-text;
+      text-align: center;
+    }
 
     &__name{
-      font-size: 1.5rem;
+      font-size: 1.5em;
       padding-top: 1rem;
-      text-align: center;
       text-transform: capitalize;
-      font-family: vars.$font-text;
+      padding-bottom:0.8rem;
 
-      @media only screen and (min-width: 601px) {
-        font-size: 2rem;
+      @media only screen and (min-width: vars.$breakpoint-tablet) {
+        padding-top: 1.2rem;
+        padding-bottom:0.5rem;
       }
-
     }
-  
+
     &__biography{
-      margin: auto;
-      margin-bottom: 1em;
-      font-size: 1rem;
-      padding-top: .8rem;
-      width: 90%;
-      font-style: italic;
-      text-align: justify;
       font-family: vars.$font-text;
-
-      @media only screen and (min-width: 601px) {
-        font-size: 1.25rem;
-        font-style: initial;
-      }
+      text-align: justify;
+      line-height: 1.2rem;
     }
-
-
     &__link{
       border: solid vars.$dark-blue 1px;
+      padding: .3rem .2rem;
       width: 60%;
-      margin: auto;
-      text-align: center;
       border-radius: 15px;
-      height: 1.5em;
-      margin-bottom: 1em;
       color: vars.$dark-blue;
-      line-height: 1.5em;
-      font-family: vars.$font-text;
+      font-size:1em;
+      position: absolute;
+      bottom:1rem;
+      left:20%;
+      
     }
-
-  
-
-  
-  
-  &__Title{
-    font-size: 1.75em;
-    width: 100%;
-    border-top: solid black 1px;
-    border-bottom: solid black 1px;
-    height: 2em;
-    display: grid;
-    place-items: center;
-  }
-
-  &__List{
-    height: 13em;
-    overflow-y: scroll;
   }
 }
 
-@media only screen and (min-width: 601px) {
 
-  .resultsProfile{
-   
-  &__Picture{
-   // width:100%
-  }
-
-  &__LeftFlex{
-    margin-top:1em;
-    display: flex;
-    width: 15%;
-  }
-
-  &__RightFlex{
-    padding-left: 0.5em;
-    margin-top:1em;
-    display: flex;
-    width: 85%;
-    flex-direction: column;
-  }
-
-  &__Name{
-    margin-bottom: 0.2em;
-  }
-
- 
-}
-
-@media only screen and (min-width: 601px) {
-
-  .profileResult{
-   //  margin-right: 2%;
-    
-    &__Picture{
-      width:unset;
-      object-fit: contain;
-
-    }
-
-  }
-
-  .profileResult__Card{
-    width: 100%;
-    
-  }
-
-}
-}

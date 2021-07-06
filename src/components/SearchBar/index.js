@@ -41,11 +41,7 @@ const SearchBar = ({adress, setAdress, setCenter, saveUserAddress, loadUsersByCo
 
   const handleSubmitClick = (evt) => {
     evt.preventDefault();
-    
-    
     // On force le changement d'url vers /resultats
-    
-    
     loadUsersByCountry();
     history.push('/resultats');
   };
@@ -56,23 +52,28 @@ const SearchBar = ({adress, setAdress, setCenter, saveUserAddress, loadUsersByCo
         value={adress}
         onChange={setAdress}
         onSelect={handleSelect}
+        searchOptions={{ types: ['geocode'] }}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <>
             <form className="searchBar__form">
-              <input className="searchBar__mainInput" {...getInputProps({ placeholder: "Entrez une ville ou un pays" })} />
+              <input className="searchBar__mainInput" {...getInputProps({ placeholder: "Sélectionner une ville où vous souhaitez voyager" })} />
               <input type="submit" className="searchBar__submitButton" value="" onClick={handleSubmitClick}/>
             </form>
-            <div>
+            <div className="autocomplete-dropdown-container">
               {loading ? <div>...loading</div> : null}
 
               {suggestions.map(suggestion => {
                 const style = {
-                  backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                  backgroundColor: suggestion.active ? "#96CDEF" : "#fff",
+                  fontSize: "1.1rem",
+                  textAlign: "left",
+                  paddingTop:"0.5rem",
+                  paddingLeft:"1.2rem",
                 };
 
                 return (
-                  <div {...getSuggestionItemProps(suggestion, { style })}>
+                  <div className="autocomplete-dropdown-suggestion" {...getSuggestionItemProps(suggestion, { style })}>
                     {suggestion.description}
                   </div>
                 );

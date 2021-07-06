@@ -7,6 +7,7 @@ import {
   CHANGE_PASSWORD_PROFILE_FORM_FIELD_VALUE,
   CHANGE_PROFILE_FORM_FIELD_VALUE,
   RESET_PASSWORD,
+  SAVE_CONNECTED_USER_ID
 } from 'src/actions/log';
 
 import {
@@ -32,6 +33,7 @@ import {
 import { SET_MY_PROFILE_LOADING } from 'src/actions/loading';
 
 const initialState = {
+  connectedUserId: '',
   isConnected: 'checking',
   email: '',
   password: '',
@@ -44,7 +46,7 @@ const initialState = {
   redirectionToMyProfile: false,
   isMyProfileLoaded: 'checking',
   newAddress: '',
-  completeNewAddress: [],
+  completeNewAddress:[],
   avatarFile: null,
 };
 
@@ -55,10 +57,15 @@ export default (state = initialState, action = {}) => {
         ...state,
         token: action.userToken,
       };
+    case SAVE_CONNECTED_USER_ID:
+    return {
+      ...state,
+      connectedUserId: action.userId,
+    };
     case SAVE_CONNECTED_USER_DATA:
       return {
         ...state,
-        connectedUserData: action.decodedToken,
+        connectedUserData: action.connectedUserInfos,
         isConnected: true,
         isLogInOpen: false,
         email: '',
@@ -75,6 +82,8 @@ export default (state = initialState, action = {}) => {
         isConnected: false,
         isLogOutOpen: false,
         connectedUserData: '',
+        connectedUserId: '',
+        isMyProfileLoaded: 'checking',
         token: '',
       };
     case SET_IS_CONNECTED:

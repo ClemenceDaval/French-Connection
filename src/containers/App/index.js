@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { loadConnectedUserData, setIsConnected, saveTokenInState } from 'src/actions/log';
+import { loadConnectedUserData, setIsConnected, saveTokenInState, saveConnectedUserId } from 'src/actions/log';
 
 import { loadHobbiesList } from 'src/actions/hobbies';
 
@@ -39,6 +39,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   saveTokenInState: (value) => {
     dispatch(saveTokenInState(value));
   },
+  saveConnectedUserId: (userId) => {
+    dispatch(saveConnectedUserId(userId));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -3,24 +3,31 @@
 .homePageMap{
   // border:5px solid black;
   margin:auto;
-  margin-top:2rem;
+  margin-top:3rem;
 
   @media (min-width: vars.$max-width) {
     width:vars.$max-width;
   }
 
   &__title{
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     margin-top: 5rem;
     font-family: vars.$font-title;
+    margin:1rem 1.5rem 0;
+
+    @media (min-width: vars.$breakpoint-tablet) {
+      font-size: 2rem;
+      margin:2rem 1rem 0;
+
+    }
   }
 
   &__image{
     margin-top:5rem;
     width:85%;
 
-    @media (min-width: vars.$max-width) {
-      width:vars.$max-width;
+    @media (min-width: vars.$breakpoint-desktop) {
+      width:vars.$breakpoint-desktop;
     }
   }
 

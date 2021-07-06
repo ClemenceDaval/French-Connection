@@ -1,3 +1,5 @@
+import { bindActionCreators } from "redux";
+
 // action type CHANGE_LOG_IN_FIELD_VALUE
 export const CHANGE_LOG_IN_FIELD_VALUE = 'CHANGE_LOG_IN_FIELD_VALUE';
 
@@ -20,9 +22,9 @@ export const logIn = () => ({
 export const SAVE_CONNECTED_USER_DATA = 'SAVE_CONNECTED_USER_DATA';
 
 // action creator saveConnectedUserData
-export const saveConnectedUserData = (decodedToken) => ({
+export const saveConnectedUserData = (connectedUserInfos) => ({
   type: SAVE_CONNECTED_USER_DATA,
-  decodedToken,
+  connectedUserInfos,
 });
 
 // action type LOG_OUT
@@ -86,4 +88,13 @@ export const LOAD_CONNECTED_USER_DATA = 'LOAD_CONNECTED_USER_DATA';
 export const loadConnectedUserData = (id) => ({
   type: LOAD_CONNECTED_USER_DATA,
   id,
+});
+
+// action type SAVE_CONNECTED_USER_ID
+export const SAVE_CONNECTED_USER_ID = 'SAVE_CONNECTED_USER_ID';
+
+// action creator saveConnectedUserId
+export const saveConnectedUserId = (userId) => ({
+  type: SAVE_CONNECTED_USER_ID,
+  userId,
 });

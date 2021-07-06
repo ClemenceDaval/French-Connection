@@ -22,7 +22,7 @@ const ModifyCity = ({
     const addressComponents = results[0].address_components;
     console.log(addressComponents);
     const city = addressComponents.find(
-      (component) => component.types.includes('locality'),
+      (component) => component.types.includes('locality') || component.types.includes('administrative_area_level_3') || component.types.includes('administrative_area_level_1') ,
     );
     const cityName = city.long_name;
     console.log(cityName);
@@ -51,44 +51,47 @@ const ModifyCity = ({
   };
 
   return (
-    <div className={modifyCity ? 'modifyCity' : 'modifyCity__close'}>
-      <div className="modifyCity__modal">
-        <h1 className="modifyCity__modal__title"> Modifier votre ville de résidence </h1>
-        <button className="modifyCity__modal__closeButton" type="button" onClick={closeModifyCity}> X </button>
-        <div className="SearchBar">
-          <PlacesAutocomplete
-            value={address}
-            onChange={setNewAddress}
-            onSelect={handleSelect}
-            searchOptions={{ types: ['geocode'] }}
-          >
-            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-              <div>
-                <div className="SearchBar__form">
-                  <input className="SearchBar__mainInput" {...getInputProps({ placeholder: 'Saisissez votre recherche' })} />
-                  <input type="button" className="SearchBar__submit" value="" onClick={handleClick} />
-                </div>
+    <>
+      <div className={modifyCity ? 'modifyCityBlur' : 'modifyCity__close'}> </div>
+      <div className={modifyCity ? 'modifyCity' : 'modifyCity__close'}>
+        <div className="modifyCity__modal">
+          <h1 className="modifyCity__modal__title"> Modifier votre ville de résidence </h1>
+          <button className="modifyCity__modal__closeButton" type="button" onClick={closeModifyCity}> X </button>
+          <div className="SearchBar">
+            <PlacesAutocomplete
+              value={address}
+              onChange={setNewAddress}
+              onSelect={handleSelect}
+              searchOptions={{ types: ['geocode'] }}
+            >
+              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                 <div>
-                  {loading ? <div>...loading</div> : null}
+                  <div className="SearchBar__form">
+                    <input className="SearchBar__mainInput" {...getInputProps({ placeholder: 'Saisissez votre recherche' })} />
+                    <button type="button" className="modifyCity__modal__saveButton" onClick={handleClick}> Enregistrer</button>
+                  </div>
+                  <div>
+                    {loading ? <div>...loading</div> : null}
 
-                  {suggestions.map((suggestion) => {
-                    const style = {
-                      backgroundColor: suggestion.active ? '#41b6e6' : '#fff',
-                    };
+                    {suggestions.map((suggestion) => {
+                      const style = {
+                        backgroundColor: suggestion.active ? '#41b6e6' : '#fff',
+                      };
 
-                    return (
-                      <div {...getSuggestionItemProps(suggestion, { style })}>
-                        {suggestion.description}
-                      </div>
-                    );
-                  })}
+                      return (
+                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                          {suggestion.description}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            )}
-          </PlacesAutocomplete>
+              )}
+            </PlacesAutocomplete>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

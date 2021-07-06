@@ -1,72 +1,71 @@
 @use 'src/styles/_vars';
 
 .resultsProfiles{
-  height: 50vh;
+  height: 100%;
 
+  @media (min-width: vars.$breakpoint-tablet) {
+    height:80vh;
+  }
   
-  &__Header{
+  &__header{
     margin-top: 0.5em;
     padding: 0.5em;
-    
     width: 100%;
     border-top: 1px solid #000;
     border-bottom: 1px solid #000;
     margin-bottom: 0.5em;
 
-    @media only screen and (min-width: 601px) {
+    @media (min-width: vars.$breakpoint-tablet) {
       border: 1px solid #000;
       margin-top: 0;
     }
   }
 
-  &__List{
-    width: 80%;
+  &__list{
+    width: 95%;
     margin: auto;
     padding-bottom: 5em;
 
-    @media only screen and (min-width: 601px) {
-      width: 100%;
+    @media (min-width: vars.$breakpoint-tablet) {
+      width: 80%;
       padding-bottom: 0;
       height: initial;
-      overflow-y: scroll;
+      overflow-y: auto;
     }
   }
 
-  &__City{
+  &__city{
     font-family: vars.$font-title;
     font-size: 1.25em;
     margin-bottom: 0.5em;
     text-decoration: underline;
   }
 
-  &__SearchResult{
+  &__searchResult{
     font-style: italic;
     font-size: 1em;
     font-family: vars.$font-title;
   }
 }
 
-@media only screen and (min-width: 601px) {
+@media (min-width: vars.$breakpoint-tablet) {
 
   .resultsProfiles{
     padding-left: 1em;
     padding-right: 1em;
     margin-top: 1em;
-    width: 40%;
-    height: 90%;
+    width: 50%;
     padding-bottom: 0;
     display: flex;
     flex-direction: column;
 
-   
-
-  &__Title{
-    
+  &__title{
     height: 4em;
     border-top: solid black 0px;
     border-bottom: solid black 0px;
   }
-  &navBar__List{
+
+  &navBar__list{
     overflow-y: scroll;
   }
 }

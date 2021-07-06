@@ -2,38 +2,70 @@
 import axios from 'axios';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
+import { toast } from 'react-toastify';
 
 import {
   LOAD_USER_PROFILE,
-  saveUserProfile,
   LOAD_USERS_CARDS,
-  saveUsersCards,
   LOAD_USERS_REVIEWS,
+  saveUserProfile,
+  saveUsersCards,
   saveUsersReviews,
 } from 'src/actions/user';
 
-import { LOG_IN, LOAD_CONNECTED_USER_DATA, loadConnectedUserData, saveConnectedUserData, LOG_OUT, closeSignIn, saveTokenInState, setIsConnected, resetPassword } from 'src/actions/log';
 import {
-  LOAD_USERS_BY_COUNTRY, saveUsersList, saveUsersCities, loadingCities, saveUsersCity,
+  LOG_IN,
+  LOAD_CONNECTED_USER_DATA,
+  LOG_OUT,
+  saveConnectedUserId,
+  saveConnectedUserData,
+  saveTokenInState,
+  setIsConnected,
+  resetPassword
+} from 'src/actions/log';
+
+import {
+  LOAD_USERS_BY_COUNTRY,
+  saveUsersList,
+  saveUsersCities,
+  loadingCities,
+  saveUsersCity,
 } from 'src/actions/map';
 
-import { LOAD_HOBBIES_LIST, saveHobbiesList, setLoadingHobbies } from 'src/actions/hobbies';
-import { LOAD_SERVICES_LIST, saveServicesList, setLoadingServices } from 'src/actions/services';
+import {
+  LOAD_HOBBIES_LIST,
+  saveHobbiesList,
+  setLoadingHobbies,
+} from 'src/actions/hobbies';
 
-import { toggleLogIn, toggleLogOut, toggleSignIn } from 'src/actions/modals';
+import {
+  LOAD_SERVICES_LIST,
+  saveServicesList,
+  setLoadingServices,
+} from 'src/actions/services';
+
+import {
+  toggleLogIn,
+  toggleLogOut,
+  toggleSignIn
+} from 'src/actions/modals';
 
 import {
   MODIFY_PROFILE,
   redirectToMyProfile,
-  SEND_AVATAR,
-  saveAvatar,
   saveModifiedConnectedUserData,
+  resetCityField,
 } from 'src/actions/modifyForm';
 
-import { toast } from 'react-toastify';
-import { setLoading, setMyProfileLoading } from 'src/actions/loading';
+import {
+  setLoading,
+  setMyProfileLoading,
+} from 'src/actions/loading';
 
-import { ADD_NEW_USER, resetSignInFields } from 'src/actions/signIn';
+import {
+  ADD_NEW_USER,
+  resetSignInFields
+} from 'src/actions/signIn';
 
 const api = axios.create({
   baseURL: 'http://ec2-34-239-254-34.compute-1.amazonaws.com/api/v1/',
@@ -41,6 +73,72 @@ const api = axios.create({
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
+    
+    // Creation of a new user
+    case ADD_NEW_USER: {
+      const state = store.getState();
+      const {
+        firstname, lastname, email, password, confirmedPassword,
+      } = state.signIn;
+      api
+        .post(
+          '/user',
+          {
+            firstname,
+            lastname,
+            email,
+            confirmedPassword,
+            password,
+          },
+        )
+        .then((response) => {
+          toast.info('Inscription réussie. Veuillez vous connecter');
+          store.dispatch(toggleSignIn(false));
+          store.dispatch(resetSignInFields());
+        }).catch((error) => {
+          console.log(error);
+          toast.info('Un problème est survenu');
+        });
+      next(action);
+      break;
+    }
+
+    case LOAD_USER_PROFILE: {
+      // CONNECTED USER ONLY
+      const userToken = localStorage.getItem('token');
+      // SET LOADER TO TRUE
+      store.dispatch(setLoading(true));
+      // RETRIEVE ID FROM ACTION TO DETERMINE WHICH ENDPOINT
+      const idParam = (action.userId);
+      
+      // REQUEST
+      api
+        .get(`/user/${idParam}`, {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
+        // RESPONSE
+        .then((response) => {
+          const userInfos = response.data;
+          // SAVE OF USER INFOS IN STATE
+          store.dispatch(saveUserProfile(userInfos));
+          // SET LOADER TO FALSE
+          store.dispatch(setLoading(false));
+        // ERROR
+        }).catch((error) => {
+          const errorStatus = error.response.status;
+          if (errorStatus === 401) {
+            window.location.href = '/403';
+          }
+          if (errorStatus === 404) {
+            window.location.href = '/404';
+          }
+        });
+      next(action);
+      break;
+    }
+
     case LOG_IN: {
       // connexion de l'utilisateur
       // on extrait l'email et le password du state
@@ -72,15 +170,19 @@ export default (store) => (next) => (action) => {
           // on décode le token pour aller chercher son id
           const decodedToken = jwt_decode(userToken);
 
-          // on va chercher les données de l'utilisateur connecté
-          store.dispatch(loadConnectedUserData(decodedToken.id));
-          // on ferme le modal de logIn
+          // on sauvegarde l'id de l'utilisateur
+          store.dispatch(saveConnectedUserId(decodedToken.id));
+
+          // on ferme le modal de logIn et on passe en connecté
+          store.dispatch(setIsConnected(true));
           store.dispatch(toggleLogIn(false));
+
           // on informe l'utilisateur qu'il est connecté
           toast.info('Vous êtes maintenant connectés');
         }).catch((error) => {
+          console.log(error);
           console.log('Vous n\'avez pas pu être identifié');
-          
+          toast.info('Vous n\'avez pas pu être identifié');
         });
       next(action);
       break;
@@ -89,6 +191,7 @@ export default (store) => (next) => (action) => {
     case LOAD_CONNECTED_USER_DATA: {
       const { id } = action;
       const userToken = localStorage.getItem('token');
+      store.dispatch(setMyProfileLoading(false));
 
       api
         .get(`/user/${id}`, {
@@ -98,106 +201,31 @@ export default (store) => (next) => (action) => {
         })
         .then((response) => {
           console.log(userToken);
-          // l'API nous retourne les infos de l'utilisateur
-          // console.log(response.data);
           const connectedUserInfos = response.data;
-          // console.log(response.headers);
+          console.log(connectedUserInfos);
           // on sauvegarde ces infos
           store.dispatch(saveConnectedUserData(connectedUserInfos));
           // gestion du loader dans la page profil
+          console.log('on load les infos de l\'utilisateur');
           store.dispatch(setMyProfileLoading(true));
-          // console.log('la requête seffectue');
         }).catch((error) => {
-          store.dispatch(setMyProfileLoading(false));
+          store.dispatch(setMyProfileLoading(true));
           // eslint-disable-next-line no-console
           const errorStatus = error.response.status;
           // console.log(error.response.status);
           console.log('vous ne passerez pas');
-          if (errorStatus === 401) {
-            window.location.href = '/403';
-          }
-          if (errorStatus === 404) {
-            window.location.href = '/404';
-          }
+          // if (errorStatus === 401) {
+          //   window.location.href = '/403';
+          // }
+          // if (errorStatus === 404) {
+          //   window.location.href = '/404';
+          // }
         });
       // puis on décide si on la laisse filer ou si on la bloque
       next(action);
       break;
     }
-
-    case LOAD_USER_PROFILE: {
-      // CETTE REQUETE N'EST ACCESSIBLE QUE POUR UN UTILISATEUR CONNECTE
-      // Récupération des infos d'un utilisateur (page mon-profil ou notre-reseau/utilisateur/id)
-      const idParam = (action.userId);
-      store.dispatch(setLoading(true));
-      console.log(idParam);
-      // on récupère le token stocké dans le localStorage
-      const userToken = localStorage.getItem('token');
-      console.log(userToken);
-      api
-        .get(`/user/${idParam}`, {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        })
-        .then((response) => {
-          // l'API nous retourne les infos de l'utilisateur
-          // console.log(response.status);
-          console.log(response.data);
-          const userInfos = response.data;
-          console.log(response.headers);
-          // on sauvegarde ces infos
-          store.dispatch(saveUserProfile(userInfos));
-          // gestion du loader dans la page profil
-          store.dispatch(setLoading(false));
-          console.log('la requête seffectue');
-        }).catch((error) => {
-          // eslint-disable-next-line no-console
-          const errorStatus = error.response.status;
-          console.log(error.response.status);
-          console.log('vous ne passerez pas');
-          if (errorStatus === 401) {
-            window.location.href = '/403';
-          }
-          if (errorStatus === 404) {
-            window.location.href = '/404';
-          }
-        });
-      // puis on décide si on la laisse filer ou si on la bloque
-      next(action);
-      break;
-    }
-    case ADD_NEW_USER: {
-      // Création d'un nouvel utilisateur (inscription)
-      const state = store.getState();
-      const {
-        firstname, lastname, email, password, confirmedPassword,
-      } = state.signIn;
-      api
-        .post(
-          '/user',
-          {
-            firstname,
-            lastname,
-            email,
-            confirmedPassword,
-            password,
-          },
-        )
-        .then((response) => {
-          console.log(response);
-          console.log('Vous êtes inscrits');
-          store.dispatch(toggleSignIn(false));
-          toast.info('Inscription réussie. Veuillez vous connecter');
-          store.dispatch(resetSignInFields());
-        }).catch((error) => {
-          console.log(error);
-          toast.info('Un problème est survenu');
-        });
-      next(action);
-      break;
-    }
-
+    
     case LOAD_USERS_CARDS:
       // affichage de tous les profils sous forme de cards
 
@@ -295,17 +323,20 @@ export default (store) => (next) => (action) => {
           store.dispatch(resetPassword());
           store.dispatch(redirectToMyProfile(true));
           store.dispatch(saveModifiedConnectedUserData(response.data));
+          store.dispatch(resetCityField());
+          toast.info('Vos modifications ont été enregistrées');
           // window.location.href = '/mon-profil';
           // const usersList = response.data;
           // store.dispatch(saveUsersCards(usersList));
         }).catch((error) => {
           // eslint-disable-next-line no-console
+          store.dispatch(redirectToMyProfile(true));
+          store.dispatch(resetCityField());
+          toast.info('Un problème est survenu. Vos modifications n\'ont pas été enregistrées');
+
           const errorStatus = error.response.status;
           console.log(errorStatus);
           console.log('vous ne passerez pas');
-          // if (errorStatus === 401) {
-          //   window.location.href = '/403';
-          // }
         });
       next(action);
       break;

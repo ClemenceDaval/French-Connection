@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+// == Import components
 import Field from 'src/components/Field';
 import TextArea from 'src/components/TextArea';
 import ModifyCity from 'src/containers/ModifyCity';
@@ -10,7 +12,6 @@ import ProfilePrincipalInfos from 'src/components/ProfilePrincipalInfos';
 import ModifyHelperSection from 'src/containers/ModifyHelperSection';
 import ProfileButton from 'src/components/ProfileButton';
 import Loader from 'src/components/Loader';
-
 
 // == Import style
 import './modifyProfile.scss';
@@ -33,6 +34,17 @@ const ModifyProfile = ({
 }) => {
   const userId = connectedUserData.id;
 
+  useEffect(() => {
+    console.log('useEffect');
+    loadHobbiesList();
+    loadServicesList();
+  }, []);
+
+  const [firstnameErrorMessage, setFirstnameErrorMessage] = useState('');
+  const [lastnameErrorMessage, setLastnameErrorMessage] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+
   let name = '';
   if (connectedUserData.nickname != null) {
     name = connectedUserData.nickname;
@@ -41,26 +53,19 @@ const ModifyProfile = ({
     name = `${connectedUserData.firstname} ${connectedUserData.lastname}`;
   }
 
-  const [firstnameErrorMessage, setFirstnameErrorMessage] = useState('');
-  const [lastnameErrorMessage, setLastnameErrorMessage] = useState('');
-  const [emailErrorMessage, setEmailErrorMessage] = useState('');
-  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
-
+  // verifications before sending the form
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log('je souhaite envoyer mon formulaire');
 
     let myHobbiesList = [];
     connectedUserData.hobbies.map((hobby) => {
       myHobbiesList = [...myHobbiesList, hobby.id];
     });
-    console.log(myHobbiesList);
 
     let myServicesList = [];
     connectedUserData.services.map((service) => {
       myServicesList = [...myServicesList, service.id];
     });
-    console.log(myServicesList);
 
     // reset of error messages
     setFirstnameErrorMessage('');
@@ -68,26 +73,28 @@ const ModifyProfile = ({
     setEmailErrorMessage('');
     setPasswordErrorMessage('');
 
-    console.log(connectedUserData.newPassword);
-
     let nbError = 0;
     const emailFormat = new RegExp(/^\S+@\S+\.\S+$/);
+    const passwordFormat = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
 
-    if (connectedUserData.firstname === '') {
+    if ((connectedUserData.firstname).trim() === '') {
       setFirstnameErrorMessage('Ce champ ne doit pas être vide');
       nbError += 1;
     }
-    if (connectedUserData.lastname === '') {
+    if (connectedUserData.lastname.trim() === '') {
       setLastnameErrorMessage('Ce champ ne doit pas être vide');
       nbError += 1;
     }
-    if (connectedUserData.email === '') {
+    if (connectedUserData.email.trim() === '') {
       setEmailErrorMessage('Ce champ ne doit pas être vide');
       nbError += 1;
     }
     if (!emailFormat.test(connectedUserData.email)) {
       setEmailErrorMessage('Cet email n\'est pas valide');
       nbError += 1;
+    }
+    if (newPassword !== '' && !passwordFormat.test(newPassword)){
+      setPasswordErrorMessage('Le mot de passe doit contenir au moins 8 caractères, dont au moins une majuscule, un chiffre et un caractère spécial.');
     }
     if (newPassword !== confirmedNewPassword) {
       setPasswordErrorMessage('Les mots de passe ne correspondent pas');
@@ -97,13 +104,12 @@ const ModifyProfile = ({
       console.log('il ny a pas derreur');
       modifyProfile(userId, myHobbiesList, myServicesList);
     }
+    if (nbError !== 0) {
+      window.scrollTo(0, 200);
+    }
   };
 
-  useEffect(() => {
-    console.log('useEffect');
-    loadHobbiesList();
-    loadServicesList();
-  }, []);
+  
 
   const openModifyCityModal = () => {
     toggleModifyCityModal(true);
@@ -122,7 +128,6 @@ const ModifyProfile = ({
               <ProfilePrincipalInfos {...connectedUserData} name={name} isMyProfile />
             </div>
             <form className="modifyProfile__form" onSubmit={handleSubmit}>
-
               <div className="modifyProfile__form__section">
                 <h2 className="modifyProfile__form__section__title"> Informations personnelles</h2>
                 <div className="modifyProfile__form__subsection">
@@ -183,10 +188,11 @@ const ModifyProfile = ({
                       />
                     </div>
                     <div className="modifyProfile__form__section__fieldGroup">
-                      {passwordErrorMessage && (
-                        <div className="modifyProfile__form__errorMessage"> {passwordErrorMessage} </div>
-                      )}
+                      
                       <div className="modifyProfile__form__label" htmlFor="password">
+                        {passwordErrorMessage && (
+                          <div className="modifyProfile__form__errorMessage"> {passwordErrorMessage} </div>
+                        )}
                         <div className="modifyProfile__form__label__name"> Mot de passe </div>
                         <Field
                           className="modifyProfile__form__field"
@@ -227,9 +233,9 @@ const ModifyProfile = ({
                   <h3 className="modifyProfile__form__subsection__title"> Votre ville de résidence </h3>
                   <div className="modifyProfile__form__label">
                     <div className="modifyProfile__form__city">
-                      {/* {connectedUserData.cities === null && completeNewAddress.length === 0 ? 'Vous n\'avez pas renseigné votre ville de résidence' : ''}
+                      {connectedUserData.cities === null && completeNewAddress.length === 0 ? 'Vous n\'avez pas renseigné votre ville de résidence' : ''}
                       {connectedUserData.cities !== null && completeNewAddress.length === 0 ? `Votre ville de résidence est ${connectedUserData.cities.name}, ${connectedUserData.cities.country.frenchName}.` : ''}
-                      {completeNewAddress.length !== 0 ? `Votre ville de résidence est ${completeNewAddress[0]}, ${completeNewAddress[1]}.` : ''} */}
+                      {completeNewAddress.length !== 0 ? `Votre ville de résidence est ${completeNewAddress[0]}, ${completeNewAddress[1]}.` : ''}
                     </div>
                     <button className="modifyProfile__form__city__button" type="button" onClick={openModifyCityModal}> Changer de ville </button>
                     <ModifyCity />
@@ -237,7 +243,6 @@ const ModifyProfile = ({
                 </div>
 
               </div>
-
               <div className="modifyProfile__form__section">
                 <h2 className="modifyProfile__form__section__title"> À propos de vous </h2>
                 <div className="modifyProfile__form__section__content">
@@ -260,6 +265,7 @@ const ModifyProfile = ({
               <div id="helperSection">
                 <ModifyHelperSection />
               </div>
+
               <div className="modifyProfile__buttons">
                 <ProfileButton type="link" textContent="Annuler" color="gray" linkTo="/mon-profil" />
                 <ProfileButton type="hashlink" textContent="Enregistrer mes modifications" color="blue" onClick={handleSubmit} />

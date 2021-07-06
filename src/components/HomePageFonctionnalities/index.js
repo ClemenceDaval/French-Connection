@@ -23,9 +23,9 @@ const HomePageFonctionnalities = () => (
     <div className="homePageFonctionnalities__item">
       <img className="homePageFonctionnalities__item__image" src={func2} alt="a woman waves you" id="minus__margin" />
       <div className="homePageFonctionnalities__item__text">
-        <h3 className="homePageFonctionnalities__item__text__title"> Rencontrez d'autres voyageurs  </h3>
+        <h3 className="homePageFonctionnalities__item__text__title"> Devenez helper  </h3>
         <p className="homePageFonctionnalities__item__text__content">
-          Trouvez d’autres utilisateurs planifiant un voyage dans le pays de vos rêves. Discutez avec eux et échangez vous les bons tuyaux.
+          Paramétrer votre profil et devenez helper. Faites profiter les voyageurs vos connaissances sur votre ville de résidence et proposez des services aux voyageurs.
         </p>
       </div>
     </div>

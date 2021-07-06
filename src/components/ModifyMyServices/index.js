@@ -68,6 +68,7 @@ const ModifyMyServices = ({
       )}
       <div className="modifyMyServices__select">
         <select onChange={onChange}>
+          <option className="modifyMyService__option"> Choisissez un service</option>
           {servicesList.map((service) => {
             let correspondance = 0;
             myServices.map((myService) => {
