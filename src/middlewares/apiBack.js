@@ -225,10 +225,7 @@ export default (store) => (next) => (action) => {
       next(action);
       break;
     }
-
     
-    
-
     case LOAD_USERS_CARDS:
       // affichage de tous les profils sous forme de cards
 

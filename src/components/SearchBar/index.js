@@ -57,7 +57,7 @@ const SearchBar = ({adress, setAdress, setCenter, saveUserAddress, loadUsersByCo
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <>
             <form className="searchBar__form">
-              <input className="searchBar__mainInput" {...getInputProps({ placeholder: "Entrez une ville ou un pays" })} />
+              <input className="searchBar__mainInput" {...getInputProps({ placeholder: "Sélectionner une ville où vous souhaitez voyager" })} />
               <input type="submit" className="searchBar__submitButton" value="" onClick={handleSubmitClick}/>
             </form>
             <div className="autocomplete-dropdown-container">

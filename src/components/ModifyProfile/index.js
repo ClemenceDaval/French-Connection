@@ -53,8 +53,6 @@ const ModifyProfile = ({
     name = `${connectedUserData.firstname} ${connectedUserData.lastname}`;
   }
 
-  
-
   // verifications before sending the form
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -77,22 +75,26 @@ const ModifyProfile = ({
 
     let nbError = 0;
     const emailFormat = new RegExp(/^\S+@\S+\.\S+$/);
+    const passwordFormat = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
 
-    if (connectedUserData.firstname === '') {
+    if ((connectedUserData.firstname).trim() === '') {
       setFirstnameErrorMessage('Ce champ ne doit pas être vide');
       nbError += 1;
     }
-    if (connectedUserData.lastname === '') {
+    if (connectedUserData.lastname.trim() === '') {
       setLastnameErrorMessage('Ce champ ne doit pas être vide');
       nbError += 1;
     }
-    if (connectedUserData.email === '') {
+    if (connectedUserData.email.trim() === '') {
       setEmailErrorMessage('Ce champ ne doit pas être vide');
       nbError += 1;
     }
     if (!emailFormat.test(connectedUserData.email)) {
       setEmailErrorMessage('Cet email n\'est pas valide');
       nbError += 1;
+    }
+    if (newPassword !== '' && !passwordFormat.test(newPassword)){
+      setPasswordErrorMessage('Le mot de passe doit contenir au moins 8 caractères, dont au moins une majuscule, un chiffre et un caractère spécial.');
     }
     if (newPassword !== confirmedNewPassword) {
       setPasswordErrorMessage('Les mots de passe ne correspondent pas');

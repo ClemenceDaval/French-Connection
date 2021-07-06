@@ -26,21 +26,25 @@ const SignIn = ({
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const emailFormat = new RegExp(/^\S+@\S+\.\S+$/);
+    const passwordFormat = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
 
-    if (firstname === '') {
+    if (firstname.trim() === '') {
       setErrorMessage('Le champ \'Prénom\' ne peut pas être vide');
     }
-    else if (lastname === '') {
+    else if (lastname.trim() === '') {
       setErrorMessage('Le champ \'Nom\' ne peut pas être vide');
     }
-    else if (email === '') {
+    else if (email.trim() === '') {
       setErrorMessage('Le champ \'Email\' ne peut pas être vide');
+    }
+    else if (password.trim() === '' || confirmedPassword === '') {
+      setErrorMessage('Les champs \'Mot de passe\' ne peuvent pas être vides');
     }
     else if (!emailFormat.test(email)) {
       setErrorMessage('L\'email n\'est pas valide');
     }
-    else if (password === '' || confirmedPassword === '') {
-      setErrorMessage('Les champs \'Mot de passe\' ne peuvent pas être vides');
+    else if (!passwordFormat.test(password)){
+      setErrorMessage('Le mot de passe doit contenir au moins 8 caractères, dont au moins une majuscule, un chiffre et un caractère spécial.');
     }
     else if (password !== confirmedPassword) {
       setErrorMessage('Les mots de passe ne corespondent pas');
